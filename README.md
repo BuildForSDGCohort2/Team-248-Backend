@@ -1,6 +1,5 @@
 # Team-248-Backend
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ed53b2672d664cccb71fda0eb2a537f2)](https://app.codacy.com/gh/BuildForSDGCohort2/Team-248-Backend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDGCohort2/Team-248-Backend&utm_campaign=Badge_Grade_Settings)
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
@@ -10,6 +9,8 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ed53b2672d664cccb71fda0eb2a537f2)](https://app.codacy.com/gh/BuildForSDGCohort2/Team-248-Backend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDGCohort2/Team-248-Backend&utm_campaign=Badge_Grade_Settings)
 
 ## About Laravel
 
