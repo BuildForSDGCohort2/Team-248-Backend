@@ -21,3 +21,4 @@ Homestead.json
 
 *.meta.*
 _ide_*
+.idea/
