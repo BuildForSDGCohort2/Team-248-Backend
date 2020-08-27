@@ -38,13 +38,19 @@ class AuthTest extends TestCase
     public function user_can_logout()
     {
         $user = factory('App\Models\User')->create();
-        $credentials = [
-            'email' => $user->email,
-            'password' => 'password'
-        ];
 
         Sanctum::actingAs($user, ['authToken']);
 
         $this->post(route('api.logout'))->assertSee('Token deleted');
+    }
+
+    /** @test */
+    public function can_get_user_data_by_token()
+    {
+        $user = factory('App\Models\User')->create();
+
+        Sanctum::actingAs($user, ['authToken']);
+
+        $this->get(route('api.getUser'))->assertJsonStructure(['user' => ['name', 'email']]);
     }
 }
