@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasApiTokens, SoftDeletes;
 
@@ -37,4 +37,12 @@ class User extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * Password attribute setter to hash password
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
