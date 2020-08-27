@@ -14,12 +14,7 @@ class ErrorResource extends JsonResource
     {
         $this->code = $code;
         $this->message = $message;
-        if($error != "" && is_array($error) == false) { //if $error is passed to the resource as string (but not empty string) target is the default key name of errors
-            $this->errors = ["target" => $error];
-        }else{
-            //here $error is passed as an array or not passed
-            $this->errors = $error;
-        }
+        $this->setError($error);
     }
 
     public function toArray($request)
@@ -33,5 +28,15 @@ class ErrorResource extends JsonResource
     public function withResponse($request, $response)
     {
         $response->setStatusCode($this->code);
+    }
+
+    private function setError($error){
+        //here $error is passed as an array or not passed
+        $this->errors = $error;
+        
+        //if $error is passed to the resource as string (but not empty string) target is the default key name of errors
+        if($error != "" && is_array($error) == false) {
+            $this->errors = ["target" => $error];
+        }
     }
 }
