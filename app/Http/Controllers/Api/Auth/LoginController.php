@@ -13,7 +13,7 @@ class LoginController extends Controller
     {
         $user = User::where('email', $request->input('email'))->first();
 
-        if (!$user || !Hash::check($request->input('password'), $user->password)) {
+        if (!$user || !$this->checkPassword($request->input('password'), $user->password)) {
             return response([
                 'message' => ['These credentials do not match our records.']
             ], 404);
@@ -27,5 +27,10 @@ class LoginController extends Controller
         ];
 
         return response()->json($response, 200);
+    }
+
+    private function checkPassword($plainText, $hashedText)
+    {
+        return Hash::check($plainText, $hashedText);
     }
 }
