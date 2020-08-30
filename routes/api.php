@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::group(['prefix' => 'v1'], function () {
+    Route::get('forget-password', 'API\V1\Auth\ForgetPasswordController@index');
+    Route::get('reset-password', 'API\V1\Auth\ForgetPasswordController@index')->name('password.reset');
 });

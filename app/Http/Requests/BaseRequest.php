@@ -17,15 +17,15 @@ class BaseRequest extends FormRequest
         $this->nameRules = 'required|string|between:2,50';
         $this->descriptionRules = 'required|string|between:2,200';
     }
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
+//    /**
+//     * Determine if the user is authorized to make this request.
+//     *
+//     * @return bool
+//     */
+//    public function authorize()
+//    {
+//        return false;
+//    }
     /**
      * Get the validation rules that apply to the request.
      *

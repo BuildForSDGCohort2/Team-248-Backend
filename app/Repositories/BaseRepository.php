@@ -89,9 +89,9 @@ class BaseRepository implements RepositoryInterface
         $condition = '=';
         foreach ($where as $field => $value) {
             if (is_array($value)) {
-                list($field, $condition, $val) = $value;
+                list($field, $condition, $value) = $value;
             }
-            $this->model = $this->model->where($field, $condition, $val);
+            $this->model = $this->model->where($field, $condition, $value);
         }
         return $this;
     }
@@ -115,4 +115,5 @@ class BaseRepository implements RepositoryInterface
     {
         return $this->findWhere($where)->model->delete();
     }
+
 }
