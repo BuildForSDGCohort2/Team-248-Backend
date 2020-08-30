@@ -2,8 +2,24 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Resources\ErrorResource;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+
 class OfferRequest extends BaseRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+
+        return true;
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -20,5 +36,19 @@ class OfferRequest extends BaseRequest
             "address" => "required|max:500",
             "preferred_qualifications" => "max:500"
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = (new ValidationException($validator))->errors();
+        $errorResponse = new ErrorResource(
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+            "The given data was invalid.",
+            $errors
+        );
+
+        throw new HttpResponseException(
+            response()->json($errorResponse, 422)
+        );
     }
 }

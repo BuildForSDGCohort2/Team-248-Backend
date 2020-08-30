@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\OffersCategory;
+use App\Models\OfferCategory;
 use Faker\Generator as Faker;
 
-$factory->define(OffersCategory::class, function (Faker $faker) {
+$factory->define(OfferCategory::class, function (Faker $faker) {
     return [
         "name" => $faker->text(),
         "description" => $faker->text(),
