@@ -19,6 +19,6 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::group(['prefix' => 'v1'], function () {
-    Route::get('forget-password', 'API\V1\Auth\ForgetPasswordController@index');
-    Route::get('reset-password', 'API\V1\Auth\ForgetPasswordController@index')->name('password.reset');
+    Route::post('forget-password', 'API\V1\Auth\ForgetPasswordController@index')->name('forget.password');
+    Route::post('reset-password', 'API\V1\Auth\ForgetPasswordController@index')->name('password.reset');
 });

@@ -13,19 +13,12 @@ class ForgetPasswordController extends Controller
 {
     public function index(ForgetPasswordRequest $request, ForgetPasswordService $service)
     {
-        $validated = $request->validated();
-        if($validated) {
-            try {
-                return $service->execute($request);
-            }catch(\Exception $ex){
-                Log::info($ex);
-                return new ErrorResource(Res::HTTP_BAD_REQUEST,
-                    __('Failed to send reset password email!'));
-            }
-        }else{
+        try {
+            return $service->execute($request);
+        }catch(\Exception $ex){
+            Log::info($ex);
             return new ErrorResource(Res::HTTP_BAD_REQUEST,
-                __('Request Validation Failed!'), $validated);
+                __('Failed to send reset password email!'));
         }
-
     }
 }

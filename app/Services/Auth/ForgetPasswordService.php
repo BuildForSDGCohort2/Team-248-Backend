@@ -6,7 +6,7 @@ use \App\Http\Requests\Auth\ForgetPasswordRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Response as Res;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Password;
 
 class ForgetPasswordService
@@ -33,15 +33,15 @@ class ForgetPasswordService
             $response = Password::sendResetLink(['email' => $request->get('email')]);
             switch ($response) {
                 case Password::RESET_LINK_SENT:
-                    return new SuccessResource(Res::HTTP_OK, __('Reset password link sent on your email'));
+                    return new SuccessResource(Response::HTTP_OK, __('passwords.sent'));
 
                 case Password::INVALID_USER:
-                    return new ErrorResource(Res::HTTP_UNAUTHORIZED,
-                        __('The email you have entered is not registered!'));
+                    return new ErrorResource(Response::HTTP_UNAUTHORIZED,
+                        __('passwords.user'));
             }
         } else {
-            return new ErrorResource(Res::HTTP_UNAUTHORIZED,
-                __('The email you have entered is not registered!'));
+            return new ErrorResource(Response::HTTP_UNAUTHORIZED,
+                __('passwords.user'));
         }
     }
 }
