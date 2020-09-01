@@ -1,4 +1,6 @@
-<?php namespace App\Repositories;
+<?php
+
+namespace App\Repositories;
 
 use App\Contracts\RepositoryInterface;
 
@@ -32,7 +34,8 @@ class BaseRepository implements RepositoryInterface
      * @param array $values
      * @return mixed
      */
-    public function updateOrCreate(array $attributes, array $values = []){
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
         return $this->model->updateOrCreate($attributes, $values);
     }
 
@@ -101,8 +104,9 @@ class BaseRepository implements RepositoryInterface
      * @param $page_size
      * @return mixed
      */
-    public function paginate($page_size) {
-        return $this->model->paginate($page_size);
+    public function paginate($pageSize)
+    {
+        return $this->model->paginate($pageSize);
     }
 
     /**
@@ -116,4 +120,8 @@ class BaseRepository implements RepositoryInterface
         return $this->findWhere($where)->model->delete();
     }
 
+    public function first()
+    {
+        return $this->model->first();
+    }
 }

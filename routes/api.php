@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::post('/offers', "OfferController@store");
 
 Route::group(['prefix' => 'v1'], function () {
     Route::post('forget-password', 'API\V1\Auth\ForgetPasswordController@index')->name('forget.password');
