@@ -39,9 +39,8 @@ class ForgetPasswordService
                     return new ErrorResource(Response::HTTP_UNAUTHORIZED,
                         __('passwords.user'));
             }
-        } else {
-            return new ErrorResource(Response::HTTP_UNAUTHORIZED,
-                __('passwords.user'));
         }
+        return new ErrorResource(Response::HTTP_UNAUTHORIZED,
+            __('passwords.user'));
     }
 }
