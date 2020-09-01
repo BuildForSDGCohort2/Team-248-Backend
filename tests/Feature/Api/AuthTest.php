@@ -3,6 +3,8 @@
 namespace Tests\Feature\Api;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -25,13 +27,22 @@ class AuthTest extends TestCase
     /** @test */
     public function user_can_register()
     {
+        Storage::fake('public');
+
+        $file = UploadedFile::fake()->image('pofile.jpg');
+
         $userData = factory('App\Models\User')->make()->toArray();
-        $password = [
+
+        $attributes = [
             'password' => 'password',
-            'password_confirmation' => 'password'
+            'password_confirmation' => 'password',
+            'image' => $file
         ];
 
-        $this->post(route('api.register'), array_merge($userData, $password))->assertJsonStructure(['data' => ['user', 'token']]);
+        $this->post(route('api.register'), array_merge($userData, $attributes))->assertJsonStructure(['data' => ['user', 'token']]);
+
+        // Assert the file was stored...
+        Storage::disk('public')->assertExists("profile_pictures/" . $file->hashName());
     }
 
     /** @test */
