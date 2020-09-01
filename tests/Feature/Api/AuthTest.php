@@ -41,7 +41,7 @@ class AuthTest extends TestCase
 
         Sanctum::actingAs($user, ['authToken']);
 
-        $this->post(route('api.logout'))->assertSee('Token deleted');
+        $this->post(route('api.logout'))->assertSee('Logged out successfully.');
     }
 
     /** @test */

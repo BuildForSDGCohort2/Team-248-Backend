@@ -45,11 +45,11 @@ class UserService
         }
     }
 
-    public function logout(Request $request, UserService $userService)
+    public function logout(Request $request)
     {
         try {
             $request->user()->currentAccessToken()->delete();
-            return new SuccessResource(Response::HTTP_CREATED, "Logged out In successfully.");
+            return new SuccessResource(Response::HTTP_CREATED, "Logged out successfully.");
         } catch (Exception $e) {
             return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error", ["An unexpected error occured."]);
         }
