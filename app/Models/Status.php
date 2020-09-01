@@ -9,6 +9,8 @@ class Status extends Model
 {
     use SoftDeletes;
 
+    protected $table = "status";
+
     protected $guarded = [];
 
     /**
