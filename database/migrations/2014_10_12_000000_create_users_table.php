@@ -21,10 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone_number');
             $table->date('dob');
-            $table->string('profile_img');
+            $table->string('profile_img')->nullable();
             $table->string('id_img');
             $table->string('gender');
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

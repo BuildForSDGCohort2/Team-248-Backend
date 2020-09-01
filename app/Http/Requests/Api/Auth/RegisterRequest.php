@@ -12,12 +12,11 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'phone_number' => 'string',
-            'dob' => 'date',
-            'profile_img' => 'string',
+            'phone_number' => 'required|string',
+            'dob' => 'required|date',
+            'image' => 'sometimes|image|mimes:png,jpg',
             'id_img' => 'string',
-            'gender' => 'string',
-            'is_active' => 'boolean'
+            'gender' => 'required|string'
         ];
     }
 }
