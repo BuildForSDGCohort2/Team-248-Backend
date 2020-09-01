@@ -31,7 +31,7 @@ class AuthTest extends TestCase
             'password_confirmation' => 'password'
         ];
 
-        $this->post(route('api.register'), array_merge($userData, $password))->assertJsonStructure(['user', 'token']);
+        $this->post(route('api.register'), array_merge($userData, $password))->assertJsonStructure(['data' => ['user', 'token']]);
     }
 
     /** @test */
@@ -51,6 +51,6 @@ class AuthTest extends TestCase
 
         Sanctum::actingAs($user, ['authToken']);
 
-        $this->get(route('api.getUser'))->assertJsonStructure(['user' => ['name', 'email']]);
+        $this->get(route('api.getUser'))->assertJsonStructure(['data' => ['user' => ['name', 'email']]]);
     }
 }

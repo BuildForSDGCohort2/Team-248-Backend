@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class LogoutController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, UserService $userService)
     {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json('Token deleted');
+        return $userService->logout($request);
     }
 }
