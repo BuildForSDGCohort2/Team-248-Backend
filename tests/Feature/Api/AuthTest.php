@@ -19,7 +19,7 @@ class AuthTest extends TestCase
             'password' => 'password'
         ];
 
-        $this->post(route('api.login'), $credentials)->assertJsonStructure(['user', 'token']);
+        $this->post(route('api.login'), $credentials)->assertJsonStructure(['data' => ['user', 'token']]);
     }
 
     /** @test */
