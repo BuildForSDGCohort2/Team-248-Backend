@@ -69,3 +69,61 @@
         }
     }
     ```
+-   POST /api/v1/forget-password
+
+    Description: request reset password email
+
+    Headers:
+
+-   Content-Type:application/json
+
+-   Accept: application/json
+
+    Body Parameters:
+
+    For now the user_id is sent within the request until we decide on the authentication method
+
+    ```javascript
+    {
+      "email":"test@test.com"
+    }
+    ```
+    Successful Response:
+
+    ```javascript
+    {
+        "message": "We have emailed your password reset link!.",
+    }
+    ```
+
+    Failed Response:
+
+    Status: 422
+    ```javascript
+    {
+        "message": "The given data was invalid.",
+        "errors": {
+            "email": [
+                "The email must be a valid email address."
+            ],
+        }
+    }
+    ```
+    Status: 422
+    ```javascript
+    {
+        "message": "The given data was invalid.",
+        "errors": {
+            "email": [
+                "The email field is required."
+            ],
+        }
+    }
+    ```
+    Status: 401
+    ```javascript
+    {
+        "message": "We can't find a user with that email address.",
+        "errors": ""
+    }
+    ```
