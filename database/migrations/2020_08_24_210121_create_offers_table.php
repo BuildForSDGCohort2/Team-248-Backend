@@ -18,7 +18,7 @@ class CreateOffersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger("category_id");
-            $table->foreign('category_id')->references('id')->on('offers_categories');
+            $table->foreign('category_id')->references('id')->on('offer_categories');
             $table->dateTime("start_at");
             $table->dateTime("end_at");
             $table->float("price_per_hour");
