@@ -14,7 +14,7 @@ class RegisterRequest extends FormRequest
             'password' => 'required|string|min:6|confirmed',
             'phone_number' => 'required|string',
             'dob' => 'required|date',
-            'image' => 'sometimes|image|mimes:png,jpg',
+            'image' => 'sometimes|image|mimes:png,jpg,jpeg',
             'id_img' => 'string',
             'gender' => 'required|string'
         ];
