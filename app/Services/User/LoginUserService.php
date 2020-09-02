@@ -5,6 +5,7 @@ namespace App\Services\User;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
+use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
 use Exception;
 use Illuminate\Http\Response;
@@ -32,7 +33,7 @@ class LoginUserService
         try {
             $token = $user->createToken('authToken')->plainTextToken;
             return new SuccessResource(Response::HTTP_CREATED, "Logged In successfully.", [
-                'user' => $user,
+                'user' => new UserResource($user),
                 'token' => $token
             ]);
         } catch (Exception $e) {
