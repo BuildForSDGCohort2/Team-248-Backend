@@ -15,10 +15,10 @@ class AuthTest extends TestCase
     /** @test */
     public function user_can_login()
     {
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Models\User')->create(['password' => 'UPPER&&lower&&1234']);
         $credentials = [
             'email' => $user->email,
-            'password' => 'password'
+            'password' => 'UPPER&&lower&&1234'
         ];
 
         $this->post(route('api.login'), $credentials)->assertJsonStructure(['data' => ['user', 'token']]);
@@ -34,8 +34,8 @@ class AuthTest extends TestCase
         $userData = factory('App\Models\User')->make()->toArray();
 
         $attributes = [
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'UPPER&&lower&&1234',
+            'password_confirmation' => 'UPPER&&lower&&1234',
             'image' => $file
         ];
 
