@@ -15,6 +15,7 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_img')->nullable()->change();
+            $table->string('id_img')->nullable()->change();
             $table->boolean('is_active')->default(true)->change();
         });
     }
@@ -28,6 +29,7 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_img')->nullable(false)->change();
+            $table->string('id_img')->nullable(false)->change();
             $table->boolean('is_active')->default(false)->change();
         });
     }
