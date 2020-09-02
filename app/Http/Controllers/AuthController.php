@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
@@ -9,7 +9,6 @@ use App\Services\User\GetUserService;
 use App\Services\User\LoginUserService;
 use App\Services\User\LogoutUserService;
 use App\Services\User\RegisterUserService;
-use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
