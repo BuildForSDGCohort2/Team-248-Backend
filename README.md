@@ -69,7 +69,7 @@
         }
     }
     ```
--   POST /api/v1/forget-password
+-   POST /api/forget-password
 
     Description: request reset password email
 

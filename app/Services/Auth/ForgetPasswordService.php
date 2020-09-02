@@ -47,10 +47,10 @@ class ForgetPasswordService
 
                 case Password::INVALID_USER:
                     return new ErrorResource(Response::HTTP_UNAUTHORIZED,
-                        __('passwords.user'));
+                        trans('passwords.user', ['email' => $request->get('email')]));
             }
         }
         return new ErrorResource(Response::HTTP_UNAUTHORIZED,
-            __('passwords.user'));
+            trans('passwords.user', ['email' => $request->get('email')]));
     }
 }
