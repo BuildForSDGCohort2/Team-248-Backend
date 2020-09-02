@@ -5,28 +5,32 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
+use App\Services\User\GetUserService;
+use App\Services\User\LoginUserService;
+use App\Services\User\LogoutUserService;
+use App\Services\User\RegisterUserService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function login(LoginRequest $request, UserService $userService)
+    public function login(LoginRequest $request, LoginUserService $service)
     {
-        return $userService->login($request);
+        return $service->execute($request);
     }
 
-    public function logout(Request $request, UserService $userService)
+    public function logout(Request $request, LogoutUserService $service)
     {
-        return $userService->logout($request);
+        return $service->execute($request);
     }
 
-    public function register(RegisterRequest $request, UserService $userService)
+    public function register(RegisterRequest $request, RegisterUserService $service)
     {
-        return $userService->register($request);
+        return $service->execute($request);
     }
 
-    public function user(Request $request, UserService $userService)
+    public function user(Request $request, GetUserService $service)
     {
-        return $userService->getUserByToken($request);
+        return $service->execute($request);
     }
 }
