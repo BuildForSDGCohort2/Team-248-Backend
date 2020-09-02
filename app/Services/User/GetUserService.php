@@ -23,7 +23,7 @@ class GetUserService
         try {
             return new SuccessResource(Response::HTTP_CREATED, "Fetched successfully.", ['user' => $request->user()]);
         } catch (Exception $e) {
-            return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error", ["An unexpected error occured."]);
+            return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }
     }
 }
