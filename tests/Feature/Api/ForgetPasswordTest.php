@@ -34,13 +34,15 @@ class ForgetPasswordTest extends TestCase
     /** @test */
     public function testSubmitForgetPasswordRequestEmailNotFound()
     {
+        $email = $this->faker->unique()->safeEmail;
         $this
             ->followingRedirects()
             ->post(route(self::ROUTE_FORGET_PASSWORD), [
-                'email' => $this->faker->unique()->safeEmail,
+                'email' => $email,
             ])
             ->assertStatus(Response::HTTP_UNAUTHORIZED)
-            ->assertJsonFragment(['message' => __('passwords.user')]);
+            ->assertJsonFragment(['message' =>
+                trans('passwords.user', ['email' => $email])]);
     }
 
     /** @test */
