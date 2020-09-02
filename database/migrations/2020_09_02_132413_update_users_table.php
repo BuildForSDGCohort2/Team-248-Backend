@@ -18,16 +18,4 @@ class UpdateUsersTable extends Migration
             $table->boolean('is_active')->default(true)->change();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
-    }
 }
