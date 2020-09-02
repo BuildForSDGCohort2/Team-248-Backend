@@ -80,8 +80,8 @@
 -   Accept: application/json
 
     Body Parameters:
-
-    For now the user_id is sent within the request until we decide on the authentication method
+    
+    We just send the user's email
 
     ```javascript
     {
@@ -121,6 +121,7 @@
     }
     ```
     Status: 401
+    
     ```javascript
     {
         "message": "We can't find a user with that email address.",

@@ -5,6 +5,7 @@ namespace Tests\Feature\Api;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Notification;
 use Tests\TestCase;
@@ -12,7 +13,7 @@ use Illuminate\Http\Response;
 
 class ForgetPasswordTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
     use WithFaker;
 
     const ROUTE_FORGET_PASSWORD = 'forget.password';

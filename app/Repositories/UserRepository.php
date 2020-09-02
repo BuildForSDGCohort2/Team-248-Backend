@@ -10,9 +10,4 @@ class UserRepository extends BaseRepository
     {
         $this->model = new User();
     }
-
-    public function first()
-    {
-        return $this->model->first();
-    }
 }

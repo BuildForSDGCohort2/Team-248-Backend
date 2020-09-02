@@ -7,6 +7,7 @@ use App\Http\Resources\ErrorResource;
 use App\Http\Resources\SuccessResource;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 
 class ForgetPasswordService
@@ -27,8 +28,17 @@ class ForgetPasswordService
      */
     public function execute(ForgetPasswordRequest $request)
     {
-        $user = $this->userRepo->findWhere(['email' => $request->get('email')])->first();
+        try {
+            $user = $this->userRepo->findWhere(['email' => $request->get('email')])->first();
+            return $this->handleForgetPasswordEmail($request, $user);
+        }catch(\Exception $ex){
+            Log::info($ex);
+            return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR,
+                __('Failed to send reset password email!'));
+        }
+    }
 
+    private function handleForgetPasswordEmail(ForgetPasswordRequest $request, $user){
         if ($user) {
             $response = Password::sendResetLink(['email' => $request->get('email')]);
             switch ($response) {
