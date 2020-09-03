@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
+use App\Http\Resources\ErrorResource;
 use App\Models\Offer;
 use App\Services\CreateOfferService;
 use App\Services\UpdateOfferService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class OfferController extends Controller
 {

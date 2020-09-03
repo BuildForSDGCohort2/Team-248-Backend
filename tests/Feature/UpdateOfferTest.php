@@ -94,4 +94,11 @@ class UpdateOfferTest extends TestCase
         $response->assertJson(["message" => "The given data was invalid."]);
         $response->assertJsonValidationErrors(["preferred_qualifications"]);
     }
+
+    public function testUpdateOfferNotFound()
+    {
+        $response = $this->put('/api/offers/1000', []);
+        $response->assertStatus(404);
+        $response->assertJson(["message" => "Resource not found."]);
+    }
 }
