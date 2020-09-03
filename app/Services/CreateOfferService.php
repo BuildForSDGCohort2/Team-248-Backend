@@ -10,7 +10,7 @@ use App\Repositories\StatusRepository;
 use Exception;
 use Illuminate\Http\Response;
 
-class OfferService
+class CreateOfferService
 {
     protected $offerRepository;
 
