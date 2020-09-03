@@ -101,4 +101,21 @@ class UpdateOfferTest extends TestCase
         $response->assertStatus(404);
         $response->assertJson(["message" => "Resource not found."]);
     }
+
+    public function testUpdateOfferCategoryNotFound()
+    {
+        $offer = factory(Offer::class)->create();
+        $data = [
+            "user_id" => $offer->id,
+            "category_id" => 1000,
+            "start_at" => $this->faker->dateTimeInInterval("+2 days", "+4 days"),
+            "end_at" => $this->faker->dateTimeInInterval("+5 days", "+7 days"),
+            "price_per_hour" => 90,
+            "address" => "dummyaddress",
+            "preferred_qualifications" => "dummyqualifications"
+        ];
+        $response = $this->put('/api/offers/' . $offer->id, $data);
+        $response->assertStatus(422);
+        $response->assertJson(["data"=>["message" => "The given data was invalid."]]);
+    }
 }

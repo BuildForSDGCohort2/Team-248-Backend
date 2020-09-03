@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Resources\ErrorResource;
+use App\Repositories\OfferCategoryRepository;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
