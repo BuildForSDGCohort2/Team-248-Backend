@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
 use App\Services\OfferService;
+use App\Services\UpdateOfferService;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -18,5 +19,10 @@ class OfferController extends Controller
     public function store(OfferRequest $request, OfferService $service)
     {
         return $service->execute($request);
+    }
+
+    public function update(OfferRequest $request, Offer $offer, UpdateOfferService $service)
+    {
+        return $service->execute($request, $offer);
     }
 }
