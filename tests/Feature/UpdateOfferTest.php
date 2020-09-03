@@ -16,7 +16,7 @@ class UpdateOfferTest extends TestCase
     public function testUpdateOfferSuccess()
     {
         $offer = factory(Offer::class)->create();
-        $update = [
+        $data = [
             "user_id" => $offer->id,
             "category_id" => factory(OfferCategory::class)->create()->id,
             "start_at" => $this->faker->dateTimeInInterval("+2 days", "+4 days"),
@@ -25,9 +25,73 @@ class UpdateOfferTest extends TestCase
             "address" => "dummyaddress",
             "preferred_qualifications" => "dummyqualifications"
         ];
-        $response = $this->put('/api/offers/' . $offer->id, $update);
+        $response = $this->put('/api/offers/' . $offer->id, $data);
         $response->assertStatus(200);
         $response->assertJson(["message" => "Offer updated successfully."]);
-        $this->assertDatabaseHas("offers", $update);
+        $this->assertDatabaseHas("offers", $data);
+    }
+
+    public function testUpdateOfferValidationRequiredFail()
+    {
+        $offer = factory(Offer::class)->create();
+        $response = $this->put('/api/offers/' . $offer->id, []);
+        $response->assertStatus(422);
+        $response->assertJson(["message" => "The given data was invalid."]);
+        $response->assertJsonValidationErrors(["user_id", "category_id", "start_at", "end_at", "price_per_hour", "address"]);
+    }
+
+    public function testUpdateOfferValidationPriceTypeFail()
+    {
+        $offer = factory(Offer::class)->create();
+        $data = factory(Offer::class)->raw(["price_per_hour" => "dummy string"]);
+        $response = $this->put('/api/offers/' . $offer->id, $data);
+
+        $response->assertStatus(422);
+        $response->assertJson(["message" => "The given data was invalid."]);
+        $response->assertJsonValidationErrors(["price_per_hour"]);
+    }
+
+    public function testUpdateOfferValidationPriceMinFail()
+    {
+        $offer = factory(Offer::class)->create();
+        $data = factory(Offer::class)->raw(["price_per_hour" => 0]);
+        $response = $this->put('/api/offers/' . $offer->id, $data);
+
+        $response->assertStatus(422);
+        $response->assertJson(["message" => "The given data was invalid."]);
+        $response->assertJsonValidationErrors(["price_per_hour"]);
+    }
+
+    public function testUpdateOfferValidationPriceMaxFail()
+    {
+        $offer = factory(Offer::class)->create();
+        $data = factory(Offer::class)->raw(["price_per_hour" => 20000]);
+        $response = $this->put('/api/offers/' . $offer->id, $data);
+
+        $response->assertStatus(422);
+        $response->assertJson(["message" => "The given data was invalid."]);
+        $response->assertJsonValidationErrors(["price_per_hour"]);
+    }
+
+    public function testUpdateOfferValidationAddressMaxFail()
+    {
+        $offer = factory(Offer::class)->create();
+        $data = factory(Offer::class)->raw(["address" => $this->faker->text(1000)]);
+        $response = $this->put('/api/offers/' . $offer->id, $data);
+
+        $response->assertStatus(422);
+        $response->assertJson(["message" => "The given data was invalid."]);
+        $response->assertJsonValidationErrors(["address"]);
+    }
+
+    public function testUpdateOfferValidationPreferredQualificationsMaxFail()
+    {
+        $offer = factory(Offer::class)->create();
+        $data = factory(Offer::class)->raw(["preferred_qualifications" => $this->faker->text(1000)]);
+        $response = $this->put('/api/offers/' . $offer->id, $data);
+
+        $response->assertStatus(422);
+        $response->assertJson(["message" => "The given data was invalid."]);
+        $response->assertJsonValidationErrors(["preferred_qualifications"]);
     }
 }
