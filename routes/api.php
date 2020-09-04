@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/offers', "OfferController@store");
+
+Route::post('reset-password', 'API\Auth\ResetPasswordController')->name('password.reset');
