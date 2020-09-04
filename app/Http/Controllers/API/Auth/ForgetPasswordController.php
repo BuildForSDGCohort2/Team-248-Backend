@@ -8,7 +8,7 @@ use App\Services\Auth\ForgetPasswordService;
 
 class ForgetPasswordController extends Controller
 {
-    public function index(ForgetPasswordRequest $request, ForgetPasswordService $service)
+    public function __invoke(ForgetPasswordRequest $request, ForgetPasswordService $service)
     {
         return $service->execute($request);
     }

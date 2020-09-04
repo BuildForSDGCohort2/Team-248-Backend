@@ -20,5 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/offers', "OfferController@store");
 
-Route::post('forget-password', 'API\Auth\ForgetPasswordController@index')->name('forget.password');
-Route::post('reset-password', 'API\Auth\ResetPasswordController@index')->name('password.reset');
+Route::post('forget-password', 'API\Auth\ForgetPasswordController')->name('forget.password');
+Route::post('reset-password', 'API\Auth\ResetPasswordController')->name('password.reset');
