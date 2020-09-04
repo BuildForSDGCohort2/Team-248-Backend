@@ -48,7 +48,7 @@ class BaseRequest extends FormRequest
         $errors = (new ValidationException($validator))->errors();
         $errorResponse = new ErrorResource(
             Response::HTTP_UNPROCESSABLE_ENTITY,
-            "The given data was invalid.",
+            __("The given data was invalid."),
             $errors
         );
 
