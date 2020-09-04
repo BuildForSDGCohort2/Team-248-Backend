@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
-use Illuminate\Contracts\Auth\CanResetPassword;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model implements CanResetPassword {
-    use SoftDeletes, Notifiable;
+class User extends Authenticatable {
+    use SoftDeletes, Notifiable, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
