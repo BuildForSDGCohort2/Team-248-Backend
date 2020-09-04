@@ -120,16 +120,18 @@ class AuthValidationTest extends TestCase
         $attributes = [
             'password' => 'UPPER&&lower&&1234',
             'password_confirmation' => 'UPPER&&lower&&1234',
-            'image' => $file
+            'profile_img' => $file,
+            'id_img' => $file,
         ];
 
         $response = $this->postJson(route('api.register'), array_merge($userData, $attributes));
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
-        $response->assertJsonValidationErrors(["image"]);
+        $response->assertJsonValidationErrors(["profile_img", "id_img"]);
 
         // Assert the file was stored...
-        Storage::disk('public')->assertMissing("profile_pictures/" . $file->hashName());
+        Storage::disk('public')->assertMissing("img/profiles/" . $file->hashName());
+        Storage::disk('public')->assertMissing("img/id/" . $file->hashName());
     }
 }

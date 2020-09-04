@@ -29,20 +29,28 @@ class AuthTest extends TestCase
     {
         Storage::fake('public');
 
-        $file = UploadedFile::fake()->image('pofile.jpg');
+        $profileImage = UploadedFile::fake()->image('profile.jpg');
+        $idImage = UploadedFile::fake()->image('id.jpg');
 
-        $userData = factory('App\Models\User')->make()->toArray();
 
-        $attributes = [
+        $passwords = [
             'password' => 'UPPER&&lower&&1234',
-            'password_confirmation' => 'UPPER&&lower&&1234',
-            'image' => $file
+            'password_confirmation' => 'UPPER&&lower&&1234'
         ];
 
-        $this->post(route('api.register'), array_merge($userData, $attributes))->assertJsonStructure(['data' => ['user', 'token']]);
+        $attributes = [
+            'profile_img' => $profileImage,
+            'id_img' => $idImage
+        ];
+
+        $userData = factory('App\Models\User')->make($attributes)->toArray();
+
+        $this->postJson(route('api.register'), array_merge($userData, $passwords))->assertJsonStructure(['data' => ['user', 'token']]);
+
 
         // Assert the file was stored...
-        Storage::disk('public')->assertExists("profile_pictures/" . $file->hashName());
+        Storage::disk('public')->assertExists("img/profiles/" . $profileImage-> hashName());
+        Storage::disk('public')->assertExists("img/id/" . $idImage-> hashName());
     }
 
     /** @test */

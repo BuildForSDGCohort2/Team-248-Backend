@@ -14,8 +14,8 @@ class RegisterRequest extends FormRequest
             'password' => 'required|string|min:6|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/',
             'phone_number' => 'required|string',
             'dob' => 'required|date',
-            'image' => 'sometimes|image|mimes:png,jpg,jpeg',
-            'id_img' => 'string',
+            'profile_img' => 'sometimes|image|mimes:png,jpg,jpeg',
+            'id_img' => 'sometimes|image|mimes:png,jpg,jpeg',
             'gender' => 'required|string|in:male,female'
         ];
     }

@@ -24,9 +24,14 @@ class RegisterUserService
         try {
             $data = $request->validated();
 
-            if( $request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('profile_pictures','public');
-                $data = array_merge($request->validated(), ['image' => $imagePath]);
+            if ($request->hasFile('profile_img')) {
+                $profile_img = $request->file('profile_img')->store('img/profiles', 'public');
+                $data = array_merge($data, ['profile_img' => $profile_img]);
+            }
+
+            if ($request->hasFile('id_img')) {
+                $id_img = $request->file('id_img')->store('img/id', 'public');
+                $data = array_merge($data, ['id_img' => $id_img]);
             }
 
             $user = $this->userRepository->create($data);
