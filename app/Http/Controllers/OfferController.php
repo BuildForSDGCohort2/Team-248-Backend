@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
-use App\Models\Offer;
 use App\Services\OfferService;
+use App\Services\ViewOffersService;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -16,6 +16,11 @@ class OfferController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(OfferRequest $request, OfferService $service)
+    {
+        return $service->execute($request);
+    }
+
+    public function index(Request $request, ViewOffersService $service)
     {
         return $service->execute($request);
     }
