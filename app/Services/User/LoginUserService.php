@@ -32,7 +32,7 @@ class LoginUserService
 
         try {
             $token = $user->createToken('authToken')->plainTextToken;
-            return new SuccessResource(Response::HTTP_CREATED, "Logged In successfully.", [
+            return new SuccessResource(Response::HTTP_OK, "Logged In successfully.", [
                 'user' => new UserResource($user),
                 'token' => $token
             ]);
