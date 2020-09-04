@@ -22,7 +22,7 @@ class LogoutUserService
     {
         try {
             $request->user()->currentAccessToken()->delete();
-            return new SuccessResource(Response::HTTP_CREATED, "Logged out successfully.");
+            return new SuccessResource(Response::HTTP_OK, "Logged out successfully.");
         } catch (Exception $e) {
             return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }
