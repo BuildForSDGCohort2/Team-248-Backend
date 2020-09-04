@@ -29,6 +29,7 @@ class ResetPasswordTest extends TestCase
         $token = Password::broker()->createToken($user);
 
         $this
+        	->withHeaders(['Accept' => 'application/json'])
             ->post(route(self::ROUTE_Reset_PASSWORD), [
                 'token' => $token,
                 'email' => "testtest",
@@ -51,6 +52,7 @@ class ResetPasswordTest extends TestCase
         $token = Password::broker()->createToken($user);
 
         $this
+            ->withHeaders(['Accept' => 'application/json'])
             ->post(route(self::ROUTE_Reset_PASSWORD), [
                 'token' => $token,
                 'email' => $this->faker->unique()->safeEmail,
@@ -72,6 +74,7 @@ class ResetPasswordTest extends TestCase
         $password_confirmation = "Hello@123";
 
         $this
+            ->withHeaders(['Accept' => 'application/json'])
             ->post(route(self::ROUTE_Reset_PASSWORD), [
                 'token' => $token,
                 'email' => $user->email,
@@ -96,6 +99,7 @@ class ResetPasswordTest extends TestCase
         $password ="12345";
 
         $this
+            ->withHeaders(['Accept' => 'application/json'])
             ->post(route(self::ROUTE_Reset_PASSWORD), [
                 'token' => $token,
                 'email' => $user->email,
@@ -119,6 +123,7 @@ class ResetPasswordTest extends TestCase
         $token = Password::broker()->createToken($user);
 
         $this
+            ->withHeaders(['Accept' => 'application/json'])
             ->post(route(self::ROUTE_Reset_PASSWORD), [
                 'token' => $token,
                 'email' => $user->email,
