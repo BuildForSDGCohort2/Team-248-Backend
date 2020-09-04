@@ -14,7 +14,7 @@ class ResetPasswordTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    const ROUTE_Reset_PASSWORD = 'password.reset';
+    const ROUTE_RESET_PASSWORD = 'password.reset';
 
     const USER_PASSWORD = 'Password@123';
     const USER_NEW_PASSWORD = 'Newpass@123';
@@ -30,7 +30,7 @@ class ResetPasswordTest extends TestCase
 
         $this
         	->withHeaders(['Accept' => 'application/json'])
-            ->post(route(self::ROUTE_Reset_PASSWORD), [
+            ->post(route(self::ROUTE_RESET_PASSWORD), [
                 'token' => $token,
                 'email' => "testtest",
                 'password' => self::USER_NEW_PASSWORD,
@@ -53,7 +53,7 @@ class ResetPasswordTest extends TestCase
 
         $this
             ->withHeaders(['Accept' => 'application/json'])
-            ->post(route(self::ROUTE_Reset_PASSWORD), [
+            ->post(route(self::ROUTE_RESET_PASSWORD), [
                 'token' => $token,
                 'email' => $this->faker->unique()->safeEmail,
                 'password' => self::USER_NEW_PASSWORD,
@@ -71,15 +71,15 @@ class ResetPasswordTest extends TestCase
 
         $token = Password::broker()->createToken($user);
 
-        $password_confirmation = "Hello@123";
+        $confirm_password = "Hello@123";
 
         $this
             ->withHeaders(['Accept' => 'application/json'])
-            ->post(route(self::ROUTE_Reset_PASSWORD), [
+            ->post(route(self::ROUTE_RESET_PASSWORD), [
                 'token' => $token,
                 'email' => $user->email,
                 'password' => self::USER_NEW_PASSWORD,
-                'password_confirmation' => $password_confirmation,
+                'password_confirmation' => $confirm_password,
             ])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertSee(__('validation.confirmed', [
@@ -100,7 +100,7 @@ class ResetPasswordTest extends TestCase
 
         $this
             ->withHeaders(['Accept' => 'application/json'])
-            ->post(route(self::ROUTE_Reset_PASSWORD), [
+            ->post(route(self::ROUTE_RESET_PASSWORD), [
                 'token' => $token,
                 'email' => $user->email,
                 'password' => $password,
@@ -124,7 +124,7 @@ class ResetPasswordTest extends TestCase
 
         $this
             ->withHeaders(['Accept' => 'application/json'])
-            ->post(route(self::ROUTE_Reset_PASSWORD), [
+            ->post(route(self::ROUTE_RESET_PASSWORD), [
                 'token' => $token,
                 'email' => $user->email,
                 'password' => self::USER_NEW_PASSWORD,
