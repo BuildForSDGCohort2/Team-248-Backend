@@ -19,3 +19,5 @@ Route::post('logout', 'AuthController@logout')->name('logout')->middleware('auth
 Route::get('user', 'AuthController@user')->name('getUser')->middleware('auth:sanctum');
 
 Route::post('/offers', "OfferController@store");
+
+Route::patch('/users/{user}/deactivate', "UserController@deactivate")->middleware('auth:sanctum');
