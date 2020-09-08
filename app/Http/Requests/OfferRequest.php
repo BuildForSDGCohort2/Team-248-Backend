@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Http\Resources\ErrorResource;
-use App\Repositories\OfferCategoryRepository;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
@@ -18,7 +17,9 @@ class OfferRequest extends BaseRequest
      */
     public function authorize()
     {
-
+        if ($this->user() && $this->user()->id != $this->offer->user_id) {
+            return false;
+        }
         return true;
     }
     /**
@@ -29,7 +30,6 @@ class OfferRequest extends BaseRequest
     public function rules()
     {
         return [
-            "user_id" => "required",
             "category_id" => "required",
             "start_at" => "required|date",
             "end_at" => "required|date|after:start_at",

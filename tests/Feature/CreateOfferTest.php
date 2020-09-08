@@ -27,7 +27,7 @@ class CreateOfferTest extends TestCase
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
-        $response->assertJsonValidationErrors(["user_id", "category_id", "start_at", "end_at", "price_per_hour", "address"]);
+        $response->assertJsonValidationErrors(["category_id", "start_at", "end_at", "price_per_hour", "address"]);
     }
 
     public function testCreateOfferValidationDateFail()

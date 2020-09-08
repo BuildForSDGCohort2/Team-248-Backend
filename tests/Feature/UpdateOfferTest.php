@@ -5,8 +5,10 @@ namespace Tests\Feature;
 use App\Models\Offer;
 use App\Models\OfferCategory;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class UpdateOfferTest extends TestCase
@@ -15,9 +17,11 @@ class UpdateOfferTest extends TestCase
 
     public function testUpdateOfferSuccess()
     {
-        $offer = factory(Offer::class)->create();
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user->id]);
         $data = [
-            "user_id" => $offer->id,
             "category_id" => factory(OfferCategory::class)->create()->id,
             "start_at" => $this->faker->dateTimeInInterval("+2 days", "+4 days"),
             "end_at" => $this->faker->dateTimeInInterval("+5 days", "+7 days"),
@@ -33,16 +37,22 @@ class UpdateOfferTest extends TestCase
 
     public function testUpdateOfferValidationRequiredFail()
     {
-        $offer = factory(Offer::class)->create();
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user->id]);
         $response = $this->put('/api/offers/' . $offer->id, []);
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
-        $response->assertJsonValidationErrors(["user_id", "category_id", "start_at", "end_at", "price_per_hour", "address"]);
+        $response->assertJsonValidationErrors(["category_id", "start_at", "end_at", "price_per_hour", "address"]);
     }
 
     public function testUpdateOfferValidationPriceTypeFail()
     {
-        $offer = factory(Offer::class)->create();
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user->id]);
         $data = factory(Offer::class)->raw(["price_per_hour" => "dummy string"]);
         $response = $this->put('/api/offers/' . $offer->id, $data);
 
@@ -53,7 +63,10 @@ class UpdateOfferTest extends TestCase
 
     public function testUpdateOfferValidationPriceMinFail()
     {
-        $offer = factory(Offer::class)->create();
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user->id]);
         $data = factory(Offer::class)->raw(["price_per_hour" => 0]);
         $response = $this->put('/api/offers/' . $offer->id, $data);
 
@@ -64,7 +77,10 @@ class UpdateOfferTest extends TestCase
 
     public function testUpdateOfferValidationPriceMaxFail()
     {
-        $offer = factory(Offer::class)->create();
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user->id]);
         $data = factory(Offer::class)->raw(["price_per_hour" => 20000]);
         $response = $this->put('/api/offers/' . $offer->id, $data);
 
@@ -75,7 +91,10 @@ class UpdateOfferTest extends TestCase
 
     public function testUpdateOfferValidationAddressMaxFail()
     {
-        $offer = factory(Offer::class)->create();
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user->id]);
         $data = factory(Offer::class)->raw(["address" => $this->faker->text(1000)]);
         $response = $this->put('/api/offers/' . $offer->id, $data);
 
@@ -86,7 +105,10 @@ class UpdateOfferTest extends TestCase
 
     public function testUpdateOfferValidationPreferredQualificationsMaxFail()
     {
-        $offer = factory(Offer::class)->create();
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user->id]);
         $data = factory(Offer::class)->raw(["preferred_qualifications" => $this->faker->text(1000)]);
         $response = $this->put('/api/offers/' . $offer->id, $data);
 
@@ -97,6 +119,9 @@ class UpdateOfferTest extends TestCase
 
     public function testUpdateOfferNotFound()
     {
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
         $response = $this->put('/api/offers/1000', []);
         $response->assertStatus(404);
         $response->assertJson(["message" => "Resource not found."]);
@@ -104,9 +129,11 @@ class UpdateOfferTest extends TestCase
 
     public function testUpdateOfferCategoryNotFound()
     {
-        $offer = factory(Offer::class)->create();
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user->id]);
         $data = [
-            "user_id" => $offer->id,
             "category_id" => 1000,
             "start_at" => $this->faker->dateTimeInInterval("+2 days", "+4 days"),
             "end_at" => $this->faker->dateTimeInInterval("+5 days", "+7 days"),
@@ -116,6 +143,49 @@ class UpdateOfferTest extends TestCase
         ];
         $response = $this->put('/api/offers/' . $offer->id, $data);
         $response->assertStatus(422);
-        $response->assertJson(["data"=>["message" => "The given data was invalid."]]);
+        $response->assertJson(["data" => ["message" => "The given data was invalid."]]);
+    }
+
+    public function testUpdateOfferUnauthenticated()
+    {
+        $offer = factory(Offer::class)->create();
+        $data = [
+            "category_id" => 1000,
+            "start_at" => $this->faker->dateTimeInInterval("+2 days", "+4 days"),
+            "end_at" => $this->faker->dateTimeInInterval("+5 days", "+7 days"),
+            "price_per_hour" => 90,
+            "address" => "dummyaddress",
+            "preferred_qualifications" => "dummyqualifications"
+        ];
+        $response = $this->withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ])->put('/api/offers/' . $offer->id, $data);
+        $response->assertStatus(401);
+        $response->assertJson(["message" => "Unauthenticated."]);
+    }
+
+    public function testUpdateOfferUnauthorized()
+    {
+        $user = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $offer = factory(Offer::class)->create(["user_id" => $user2->id]);
+        $data = [
+            "category_id" => factory(OfferCategory::class)->create()->id,
+            "start_at" => $this->faker->dateTimeInInterval("+2 days", "+4 days"),
+            "end_at" => $this->faker->dateTimeInInterval("+5 days", "+7 days"),
+            "price_per_hour" => 90,
+            "address" => "dummyaddress",
+            "preferred_qualifications" => "dummyqualifications"
+        ];
+        $response = $this->withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ])->put('/api/offers/' . $offer->id, $data);
+
+        $response->assertStatus(403);
+        $response->assertJson(["message" => "This action is unauthorized."]);
     }
 }
