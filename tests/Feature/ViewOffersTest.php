@@ -5,8 +5,10 @@ namespace Tests\Feature;
 use App\Models\Offer;
 use App\Models\OfferCategory;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class ViewOffersTest extends TestCase
@@ -15,7 +17,10 @@ class ViewOffersTest extends TestCase
 
     public function testViewOffersSuccess()
     {
-        $status = factory(Status::class)->create(["code" => "new"]);   
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
+        $status = factory(Status::class)->create(["code" => "new"]);
         factory(Offer::class, 10)->create(["status_id" => $status->id]);
         $response = $this->get('/api/offers');
         $response->assertStatus(200);
@@ -24,6 +29,9 @@ class ViewOffersTest extends TestCase
 
     public function testViewOffersPagination()
     {
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
         factory(Offer::class, 30)->create();
         $paginate = 20;
         $response = $this->get('/api/offers?paginate=' . $paginate);
@@ -34,6 +42,9 @@ class ViewOffersTest extends TestCase
 
     public function testViewOffersByCategory()
     {
+        $user = factory(User::class)->create();
+        Sanctum::actingAs($user);
+
         $status = factory(Status::class)->create(["code" => "new"]);
         $cat1 = factory(OfferCategory::class)->create();
         $cat2 = factory(OfferCategory::class)->create();
