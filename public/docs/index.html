@@ -48,6 +48,147 @@
 <p>Welcome to the generated API reference.</p>
 <!-- END_INFO -->
 <h1>general</h1>
+<!-- START_4dfafe7f87ec132be3c8990dd1fa9078 -->
+<h2>Return an empty response simply to trigger the storage of the CSRF cookie in the browser.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/sanctum/csrf-cookie" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/sanctum/csrf-cookie"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET sanctum/csrf-cookie</code></p>
+<!-- END_4dfafe7f87ec132be3c8990dd1fa9078 -->
+<!-- START_d7b7952e7fdddc07c978c9bdaf757acf -->
+<h2>api/register</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/register" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/register"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/register</code></p>
+<!-- END_d7b7952e7fdddc07c978c9bdaf757acf -->
+<!-- START_c3fa189a6c95ca36ad6ac4791a873d23 -->
+<h2>api/login</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/login" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/login"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/login</code></p>
+<!-- END_c3fa189a6c95ca36ad6ac4791a873d23 -->
+<!-- START_61739f3220a224b34228600649230ad1 -->
+<h2>api/logout</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/logout" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/logout"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/logout</code></p>
+<!-- END_61739f3220a224b34228600649230ad1 -->
+<!-- START_2b6e5a4b188cb183c7e59558cce36cb6 -->
+<h2>api/user</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/user" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/user"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/user</code></p>
+<!-- END_2b6e5a4b188cb183c7e59558cce36cb6 -->
 <!-- START_a45eaa0bc07a2833fc15fdfb8cd32142 -->
 <h2>Create an offer</h2>
 <p>Enables the user to create a new offer</p>
@@ -58,7 +199,7 @@
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"user_id":4,"category_id":16,"start_at":"officia","end_at":"unde","price_per_hour":23.7447,"address":"et","preferred_qualifications":"sed"}'
+    -d '{"user_id":7,"category_id":9,"start_at":"consequatur","end_at":"ut","price_per_hour":13093674.472,"address":"reprehenderit","preferred_qualifications":"qui"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers"
@@ -70,13 +211,13 @@ let headers = {
 };
 
 let body = {
-    "user_id": 4,
-    "category_id": 16,
-    "start_at": "officia",
-    "end_at": "unde",
-    "price_per_hour": 23.7447,
-    "address": "et",
-    "preferred_qualifications": "sed"
+    "user_id": 7,
+    "category_id": 9,
+    "start_at": "consequatur",
+    "end_at": "ut",
+    "price_per_hour": 13093674.472,
+    "address": "reprehenderit",
+    "preferred_qualifications": "qui"
 }
 
 fetch(url, {
@@ -189,7 +330,7 @@ fetch(url, {
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"user_id":12,"category_id":12,"start_at":"non","end_at":"ipsum","price_per_hour":1076.37,"address":"ut","preferred_qualifications":"sint"}'
+    -d '{"category_id":16,"start_at":"natus","end_at":"fugiat","price_per_hour":319.17886,"address":"non","preferred_qualifications":"provident"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers/1"
@@ -201,13 +342,12 @@ let headers = {
 };
 
 let body = {
-    "user_id": 12,
-    "category_id": 12,
-    "start_at": "non",
-    "end_at": "ipsum",
-    "price_per_hour": 1076.37,
-    "address": "ut",
-    "preferred_qualifications": "sint"
+    "category_id": 16,
+    "start_at": "natus",
+    "end_at": "fugiat",
+    "price_per_hour": 319.17886,
+    "address": "non",
+    "preferred_qualifications": "provident"
 }
 
 fetch(url, {
@@ -289,12 +429,6 @@ fetch(url, {
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>user_id</code></td>
-<td>integer</td>
-<td>required</td>
-<td>the id of the user. It will be removed once the authentication implementation is merged.</td>
-</tr>
 <tr>
 <td><code>category_id</code></td>
 <td>integer</td>
