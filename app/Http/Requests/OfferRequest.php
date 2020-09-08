@@ -17,7 +17,7 @@ class OfferRequest extends BaseRequest
      */
     public function authorize()
     {
-        if ($this->user() && $this->user()->id != $this->offer->user_id) {
+        if ($this->user() && $this->offer && $this->user()->id != $this->offer->user_id) {
             return false;
         }
         return true;

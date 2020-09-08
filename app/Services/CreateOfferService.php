@@ -23,6 +23,7 @@ class CreateOfferService
     {
         $data = $request->all();
         $data = $this->setStatusId($data);
+        $data["user_id"] = $request->user()->id;
         try {
             $offerId = $this->offerRepository->create($data)->id;
             return new SuccessResource(Response::HTTP_CREATED, "Offer created successfully.", ["id" => $offerId]);

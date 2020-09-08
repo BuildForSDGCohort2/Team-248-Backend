@@ -18,5 +18,5 @@ Route::post('login', 'AuthController@login')->name('login');
 Route::post('logout', 'AuthController@logout')->name('logout')->middleware('auth:sanctum');
 Route::get('user', 'AuthController@user')->name('getUser')->middleware('auth:sanctum');
 
-Route::post('/offers', "OfferController@store");
+Route::post('/offers', "OfferController@store")->middleware('auth:sanctum');
 Route::put('/offers/{offer}', "OfferController@update")->middleware('auth:sanctum');

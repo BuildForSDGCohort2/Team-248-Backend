@@ -227,7 +227,7 @@ curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"user_id":7,"category_id":9,"start_at":"consequatur","end_at":"ut","price_per_hour":13093674.472,"address":"reprehenderit","preferred_qualifications":"qui"}'
+    -d '{"category_id":14,"start_at":"aliquam","end_at":"reprehenderit","price_per_hour":42.66323185,"address":"aut","preferred_qualifications":"qui"}'
 
 ```
 
@@ -242,12 +242,11 @@ let headers = {
 };
 
 let body = {
-    "user_id": 7,
-    "category_id": 9,
-    "start_at": "consequatur",
-    "end_at": "ut",
-    "price_per_hour": 13093674.472,
-    "address": "reprehenderit",
+    "category_id": 14,
+    "start_at": "aliquam",
+    "end_at": "reprehenderit",
+    "price_per_hour": 42.66323185,
+    "address": "aut",
     "preferred_qualifications": "qui"
 }
 
@@ -305,8 +304,7 @@ fetch(url, {
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `user_id` | integer |  required  | the id of the user. It will be removed once the authentication implementation is merged.
-        `category_id` | integer |  required  | the id of the offer category.
+    `category_id` | integer |  required  | the id of the offer category.
         `start_at` | datetime |  required  | the start date and time of the offer.
         `end_at` | datetime |  required  | the end date and time of the offer.
         `price_per_hour` | float |  required  | the price per hour offered.
@@ -327,7 +325,7 @@ curl -X PUT \
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":16,"start_at":"natus","end_at":"fugiat","price_per_hour":319.17886,"address":"non","preferred_qualifications":"provident"}'
+    -d '{"category_id":4,"start_at":"non","end_at":"suscipit","price_per_hour":6379.715,"address":"similique","preferred_qualifications":"voluptatem"}'
 
 ```
 
@@ -342,12 +340,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 16,
-    "start_at": "natus",
-    "end_at": "fugiat",
-    "price_per_hour": 319.17886,
-    "address": "non",
-    "preferred_qualifications": "provident"
+    "category_id": 4,
+    "start_at": "non",
+    "end_at": "suscipit",
+    "price_per_hour": 6379.715,
+    "address": "similique",
+    "preferred_qualifications": "voluptatem"
 }
 
 fetch(url, {

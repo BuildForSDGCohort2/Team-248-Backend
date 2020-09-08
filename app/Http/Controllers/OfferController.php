@@ -24,7 +24,6 @@ class OfferController extends Controller
      *
      * Enables the user to create a new offer
      * 
-     * @bodyParam  user_id integer required the id of the user. It will be removed once the authentication implementation is merged.
      * @bodyParam  category_id integer required the id of the offer category.
      * @bodyParam  start_at datetime required the start date and time of the offer.
      * @bodyParam  end_at datetime required the end date and time of the offer.
