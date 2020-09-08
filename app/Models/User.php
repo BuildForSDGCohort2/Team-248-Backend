@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model {
-    use SoftDeletes;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +18,7 @@ class User extends Model {
      */
     protected $fillable = [
         'name', 'email', 'password',
-        'email_verified_at', 'phone_number',
+        'email_verified_at', 'phone_number', 'address',
         'dob', 'profile_img', 'id_img', 'gender', 'is_active'
     ];
 
@@ -34,4 +37,12 @@ class User extends Model {
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * Password attribute setter to hash password
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
