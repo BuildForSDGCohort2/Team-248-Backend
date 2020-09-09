@@ -19,3 +19,5 @@ Route::post('logout', 'AuthController@logout')->name('logout')->middleware('auth
 Route::get('user', 'AuthController@user')->name('getUser')->middleware('auth:sanctum');
 
 Route::post('/offers', "OfferController@store");
+
+Route::post('/offers/{offer}/apply', "OfferUserController@store")->middleware('auth:sanctum');
