@@ -42,8 +42,6 @@ class CreateOfferUserTest extends TestCase
         $user = factory(User::class)->create();
         Sanctum::actingAs($user);
 
-        $offer = factory(Offer::class)->create();
-
         $response = $this->post("/api/offers/10000/apply");
         $response->assertStatus(404);
         $response->assertJson(["message" => "Resource not found."]);
