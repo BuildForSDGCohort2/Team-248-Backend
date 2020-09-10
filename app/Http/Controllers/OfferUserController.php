@@ -11,16 +11,10 @@ use Illuminate\Http\Request;
 class OfferUserController extends Controller
 {
     /**
-     * Create an offer
+     * Create an offer application
      *
-     * Enables the user to create a new offer
+     * Enables the user to apply an offer
      * 
-     * @bodyParam  category_id integer required the id of the offer category.
-     * @bodyParam  start_at datetime required the start date and time of the offer.
-     * @bodyParam  end_at datetime required the end date and time of the offer.
-     * @bodyParam  price_per_hour float required the price per hour offered.
-     * @bodyParam  address string required the address where the offer takes place.
-     * @bodyParam  preferred_qualifications string optional the address where the offer takes place.
      * 
      * @response  201 {
      *    "message": "Application created successfully.",
@@ -47,6 +41,25 @@ class OfferUserController extends Controller
         return $service->execute($request, $offer);
     }
 
+    /**
+     * Cancel an application
+     *
+     * Enables the user to cancel his application for an offer
+     * 
+     * 
+     * @response  200 {
+     *    "message": "Application cancelled successfully.",
+     *    "data": ""
+     * }
+     * 
+     * @response 401 {
+     *"data": {
+     *     "message": "This action is unauthorized.",
+     *      "errors": ""
+     *   }
+     *}
+     *
+     */
     public function cancel(Request $request, OfferUser $application, CancelOfferUserService $service)
     {
         return $service->execute($request, $application);
