@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use App\Models\OfferUser;
+use App\Services\CancelOfferUserService;
 use App\Services\CreateOfferUserService;
 use Illuminate\Http\Request;
 
@@ -43,5 +45,10 @@ class OfferUserController extends Controller
     public function store(Request $request, Offer $offer, CreateOfferUserService $service)
     {
         return $service->execute($request, $offer);
+    }
+
+    public function cancel(Request $request, OfferUser $application, CancelOfferUserService $service)
+    {
+        return $service->execute($request, $application);
     }
 }

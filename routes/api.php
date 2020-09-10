@@ -21,3 +21,4 @@ Route::get('user', 'AuthController@user')->name('getUser')->middleware('auth:san
 Route::post('/offers', "OfferController@store");
 
 Route::post('/offers/{offer}/apply', "OfferUserController@store")->middleware('auth:sanctum');
+Route::patch('/applications/{application}/cancel', "OfferUserController@cancel")->middleware('auth:sanctum');
