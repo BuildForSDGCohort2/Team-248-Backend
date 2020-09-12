@@ -28,13 +28,16 @@ class UpdateOfferService
         try {
             $this->categoryRepository->findOrFail($request->category_id);
 
-            $offer->category_id = $request->category_id;
-            $offer->start_at = $request->start_at;
-            $offer->end_at = $request->end_at;
-            $offer->price_per_hour = $request->price_per_hour;
-            $offer->address = $request->address;
-            $offer->preferred_qualifications = $request->preferred_qualifications;
-            $offer->save();
+            $data = [
+                "category_id" => $request->category_id,
+                "start_at" => $request->start_at,
+                "end_at" => $request->end_at,
+                "price_per_hour" => $request->price_per_hour,
+                "address" => $request->address,
+                "preferred_qualifications" => $request->preferred_qualifications,
+            ];
+
+            $this->offerRepository->update($data, $offer->id);
             return new SuccessResource(Response::HTTP_OK, "Offer updated successfully.", ["id" => $offer->id]);
         } catch (Exception $e) {
 
