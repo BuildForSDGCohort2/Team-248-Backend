@@ -22,13 +22,14 @@ $factory->define(\App\Models\User::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'phone_number' => $faker->phoneNumber,
+        'password' => 'UPPER&&lower&&1234',
         'dob' => $faker->date("Y-m-d"),
+        'remember_token' => Str::random(10),
+        'phone_number' => $faker->phoneNumber,
+        'address' => $faker->address,
         'profile_img' => $faker->imageUrl(),
         'id_img' => $faker->imageUrl(),
-        'gender' => $faker->randomElement(['male', 'female']),
-        'is_active' => 1,
-        'remember_token' => Str::random(10),
+        'gender' => $faker->randomElement(['male','female']),
+        'is_active' => $faker->boolean,
     ];
 });
