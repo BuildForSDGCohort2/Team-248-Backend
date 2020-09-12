@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable {
-    use SoftDeletes, Notifiable;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, SoftDeletes, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +19,7 @@ class User extends Authenticatable {
      */
     protected $fillable = [
         'name', 'email', 'password',
-        'email_verified_at', 'phone_number',
+        'email_verified_at', 'phone_number', 'address',
         'dob', 'profile_img', 'id_img', 'gender', 'is_active'
     ];
 
@@ -37,9 +39,16 @@ class User extends Authenticatable {
      */
     public $timestamps = true;
 
+    /**
+     * Password attribute setter to hash password
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     public function getEmailForPasswordReset()
     {
         return $this->email;
     }
-
 }
