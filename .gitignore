@@ -22,3 +22,6 @@ Homestead.json
 *.meta.*
 _ide_*
 .idea/
+
+public/storage
+public/docs/
