@@ -46,11 +46,11 @@ class ForgetPasswordService
                     return new SuccessResource(Response::HTTP_OK, __('passwords.sent'));
 
                 case Password::INVALID_USER:
-                    return new ErrorResource(Response::HTTP_UNAUTHORIZED,
+                    return new ErrorResource(Response::HTTP_UNPROCESSABLE_ENTITY,
                         trans('passwords.user', ['email' => $request->get('email')]));
             }
         }
-        return new ErrorResource(Response::HTTP_UNAUTHORIZED,
+        return new ErrorResource(Response::HTTP_UNPROCESSABLE_ENTITY,
             trans('passwords.user', ['email' => $request->get('email')]));
     }
 }
