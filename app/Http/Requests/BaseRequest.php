@@ -1,7 +1,12 @@
 <?php
 namespace App\Http\Requests;
 
+use App\Http\Resources\ErrorResource;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Description of BaseRequest
@@ -36,5 +41,19 @@ class BaseRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = (new ValidationException($validator))->errors();
+        $errorResponse = new ErrorResource(
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+            __("The given data was invalid."),
+            $errors
+        );
+
+        throw new HttpResponseException(
+            response()->json($errorResponse, Response::HTTP_UNPROCESSABLE_ENTITY)
+        );
     }
 }

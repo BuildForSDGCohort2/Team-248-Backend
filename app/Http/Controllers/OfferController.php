@@ -19,4 +19,16 @@ class OfferController extends Controller
     {
         return $service->execute($request);
     }
+
+
+    /**
+     * @param Request $request
+     * @param Offer $offer
+     * @param RetrieveOfferService $service
+     * @return \App\Http\Resources\ErrorResource|\App\Http\Resources\SuccessResource
+     */
+    public function show(Request $request, Offer $offer, RetrieveOfferService $service)
+    {
+        return $service->execute($request, $offer);
+    }
 }

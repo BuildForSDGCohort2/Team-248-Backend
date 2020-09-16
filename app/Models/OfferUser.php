@@ -11,6 +11,8 @@ class OfferUser extends Model
 
     protected $guarded = [];
 
+    protected $table = 'offer_user';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,4 +29,12 @@ class OfferUser extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
