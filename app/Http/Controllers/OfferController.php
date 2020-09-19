@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
 use App\Services\OfferService;
+use App\Services\RetrieveOfferService;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
