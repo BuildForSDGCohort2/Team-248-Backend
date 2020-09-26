@@ -29,4 +29,34 @@ class Offer extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(OfferCategory::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function applicants(){
+        return $this->hasManyThrough(User::class,
+            OfferUser::class,
+            'offer_user.offer_id',
+            'users.id',
+            'id',
+            'offer_user.user_id');
+    }
+
+    public function offerUsers(){
+        return $this->hasMany(\App\Models\OfferUser::class, 'offer_id');
+    }
+
 }

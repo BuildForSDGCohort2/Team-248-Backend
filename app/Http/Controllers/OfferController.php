@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
-use App\Models\Offer;
+use App\Http\Requests\UserOffersRequest;
 use App\Services\OfferService;
-use Illuminate\Http\Request;
+use App\Services\RetrieveUserOffersService;
 
 class OfferController extends Controller
 {
@@ -16,6 +16,16 @@ class OfferController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(OfferRequest $request, OfferService $service)
+    {
+        return $service->execute($request);
+    }
+
+    /**
+     * @param UserOffersRequest $request
+     * @param RetrieveUserOffersService $service
+     * @return \App\Http\Resources\ErrorResource|\App\Http\Resources\SuccessResource
+     */
+    public function userOffers(UserOffersRequest $request, RetrieveUserOffersService $service)
     {
         return $service->execute($request);
     }
