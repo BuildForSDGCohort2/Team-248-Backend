@@ -28,18 +28,18 @@ class OfferResource extends JsonResource
         return [
             'id'                        => $this->id,
             'category'                  => new OfferCategoryResource($this->category),
-            'status'                    => $this->when(Auth::user() && $this->isOwner,
+            'status'                    => $this->when(Auth::guard('sanctum')->user() && $this->isOwner,
                                             new OfferStatusResource($this->status)),
             'start_at'                  => Carbon::parse($this->start_at)->timestamp,
             'end_at'                    => Carbon::parse($this->end_at)->timestamp,
             'price_per_hour'            => $this->price_per_hour,
             'address'                   => $this->address,
             'preferred_qualifications'  => $this->preferred_qualifications,
-            'applicants'                => $this->when(Auth::user() && $this->isOwner,
-                                            ApplicantResource::collection($applicants)),
+            'applicants'                => $this->when(Auth::guard('sanctum')->user() && $this->isOwner,
+                                            ApplicantResource::collection($applicants)->setOfferId($this->id)),
             'applications_number'       => count($applicants),
             'applied'                   => $this->isApplicant,
-            'application_data'          => $this->when(Auth::user() && $this->isApplicant,
+            'application_data'          => $this->when(Auth::guard('sanctum')->user() && $this->isApplicant,
                                             new ApplicationResource($this->applicant_data))
 
         ];

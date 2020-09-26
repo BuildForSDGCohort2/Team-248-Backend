@@ -55,7 +55,7 @@ class Offer extends Model
             'offer_user.user_id');
     }
 
-    public function offer_users(){
+    public function offerUsers(){
         return $this->hasMany(\App\Models\OfferUser::class, 'offer_id');
     }
 

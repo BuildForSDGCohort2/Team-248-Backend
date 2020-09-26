@@ -30,10 +30,9 @@ class RetrieveOfferService
     {
         try {
             $user = $request->user('sanctum');
-            $request->merge(['offer_id' => $offer['id']]); //for padding offer id into the request to the resources
             $offer_data = new OfferResource($offer);
             if($user){
-                $application = $offer->offer_users()->where('offer_user.user_id', $user->id)->first();
+                $application = $offer->offerUsers()->where('offer_user.user_id', $user->id)->first();
                 if($user->id == $offer->user_id){ // user is the owner of the offer
                     $offer_data = (new OfferResource($offer))->isOwner();
                 } else if($application){ //user applied for this offer

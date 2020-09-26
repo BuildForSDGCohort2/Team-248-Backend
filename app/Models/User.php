@@ -46,7 +46,7 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function offer_users(){
+    public function offerUsers(){
         return $this->hasMany(\App\Models\OfferUser::class, 'user_id');
     }
 }

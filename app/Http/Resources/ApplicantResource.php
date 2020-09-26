@@ -6,15 +6,23 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ApplicantResource extends JsonResource
 {
+    protected $offer_id;
+
+    public function setOfferId($offer_id){
+        $this->offer_id = $offer_id;
+        return $this;
+    }
+
+
     /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
-    {
-        $application = $this->offer_users()->where('offer_id', $request->get('offer_id'))->first();
+
+    public function toArray($request){
+        $application = $this->offerUsers()->where('offer_id', $$this->offer_id)->first();
         return [
             'id'                    => $this->id,
             'name'                  => $this->name,
@@ -24,6 +32,10 @@ class ApplicantResource extends JsonResource
             'gender'                => $this->gender,
             'application_data'      => new ApplicationResource($application),
         ];
+    }
+
+    public static function collection($resource){
+        return new ApplicantCollection($resource);
     }
 
 }
