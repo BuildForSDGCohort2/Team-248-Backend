@@ -15,7 +15,7 @@ class ApplicantCollection extends ResourceCollection
     }
 
     public function toArray($request){
-        return $this->collection->map(function(ApplicantResource $resource) use($request){
+        return $this->collection->map(function(Applicant $resource) use($request){
             return $resource->setOfferId($this->offer_id)->toArray($request);
         })->all();
     }

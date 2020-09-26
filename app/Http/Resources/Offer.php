@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class OfferResource extends JsonResource
+class Offer extends JsonResource
 {
     /**
      *
@@ -16,12 +16,14 @@ class OfferResource extends JsonResource
     private $isApplicant = false;
     private $applicant_data = null;
 
+
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
+
     public function toArray($request)
     {
         $applicants = $this->applicants;
@@ -36,12 +38,11 @@ class OfferResource extends JsonResource
             'address'                   => $this->address,
             'preferred_qualifications'  => $this->preferred_qualifications,
             'applicants'                => $this->when(Auth::guard('sanctum')->user() && $this->isOwner,
-                                            ApplicantResource::collection($applicants)->setOfferId($this->id)),
+                                            Applicant::collection($applicants)->setOfferId($this->id)),
             'applications_number'       => count($applicants),
             'applied'                   => $this->isApplicant,
             'application_data'          => $this->when(Auth::guard('sanctum')->user() && $this->isApplicant,
                                             new ApplicationResource($this->applicant_data))
-
         ];
     }
 
@@ -51,10 +52,21 @@ class OfferResource extends JsonResource
         return $this;
     }
 
-    public function isApplicant($applicant_data, $bool = true)
+    public function isApplicant($bool = true)
     {
         $this->isApplicant = $bool;
+        return $this;
+    }
+
+    public function setApplicantData($applicant_data){
         $this->applicant_data = $applicant_data;
         return $this;
     }
+
+    public static function collection($resource)
+    {
+        return new OfferCollection($resource);
+    }
+
 }
+

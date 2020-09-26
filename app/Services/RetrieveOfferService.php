@@ -4,7 +4,6 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\ErrorResource;
-use App\Http\Resources\OfferResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Offer;
 use App\Repositories\OfferRepository;
@@ -30,13 +29,14 @@ class RetrieveOfferService
     {
         try {
             $user = $request->user('sanctum');
-            $offer_data = new OfferResource($offer);
+            $offer_data = \App\Http\Resources\Offer::make($offer);
             if($user){
                 $application = $offer->offerUsers()->where('offer_user.user_id', $user->id)->first();
                 if($user->id == $offer->user_id){ // user is the owner of the offer
-                    $offer_data = (new OfferResource($offer))->isOwner();
+                    $offer_data = \App\Http\Resources\Offer::make($offer)->isOwner();
                 } else if($application){ //user applied for this offer
-                    $offer_data = (new OfferResource($offer))->isApplicant($application);
+                    $offer_data = \App\Http\Resources\Offer::make($offer)->isApplicant()
+                        ->setApplicantData($application);
                 }
             }
             return new SuccessResource(Response::HTTP_OK, __("Offer retrieved successfully."), $offer_data);

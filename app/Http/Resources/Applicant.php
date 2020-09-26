@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ApplicantResource extends JsonResource
+class Applicant extends JsonResource
 {
     protected $offer_id;
 
@@ -22,7 +22,7 @@ class ApplicantResource extends JsonResource
      */
 
     public function toArray($request){
-        $application = $this->offerUsers()->where('offer_id', $$this->offer_id)->first();
+        $application = $this->offerUsers()->where('offer_id', $this->offer_id)->first();
         return [
             'id'                    => $this->id,
             'name'                  => $this->name,
