@@ -40,6 +40,7 @@ class Offer extends JsonResource
             'applicants'                => $this->when(Auth::guard('sanctum')->user() && $this->isOwner,
                                             Applicant::collection($applicants)->setOfferId($this->id)),
             'applications_number'       => count($applicants),
+            'user_id'                   => $this->user_id,
             'applied'                   => $this->isApplicant,
             'application_data'          => $this->when(Auth::guard('sanctum')->user() && $this->isApplicant,
                                             new ApplicationResource($this->applicant_data))
