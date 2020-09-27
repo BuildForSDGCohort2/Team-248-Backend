@@ -74,7 +74,7 @@ class ViewAppliedOffersTest extends TestCase
         $cat1 = factory(OfferCategory::class)->create();
         $cat2 = factory(OfferCategory::class)->create();
         $offer1 = factory(Offer::class)->create(["category_id" => $cat1->id]);
-        $offer2 = factory(Offer::class)->create(["category_id" => $cat2->id]);
+        factory(Offer::class)->create(["category_id" => $cat2->id]);
 
         factory(OfferUser::class)->create(['user_id' => $user->id, 'offer_id' => $offer1->id]);
 
