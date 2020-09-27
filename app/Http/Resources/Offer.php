@@ -27,6 +27,9 @@ class Offer extends JsonResource
     public function toArray($request)
     {
         $applicants = $this->applicants;
+        if($this->isApplicant){
+            $this->setApplicantData($this);
+        }
         return [
             'id'                        => $this->id,
             'category'                  => new OfferCategoryResource($this->category),
@@ -59,8 +62,10 @@ class Offer extends JsonResource
         return $this;
     }
 
-    public function setApplicantData($applicant_data){
-        $this->applicant_data = $applicant_data;
+    public function setApplicantData($offer){
+        $application = $offer->offerUsers()->where('offer_user.user_id',
+            Auth::guard('sanctum')->user()->id)->first();
+        $this->applicant_data = $application;
         return $this;
     }
 

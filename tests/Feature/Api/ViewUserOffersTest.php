@@ -23,10 +23,9 @@ class ViewOffersTest extends TestCase
         Sanctum::actingAs($user);
 
         factory(Offer::class, 10)->create(['user_id' => $user->id]);
-        $response = $this->get('/api/user-offers');
+        $response = $this->post('/api/user-offers');
         $response->assertStatus(200);
-        $response->assertJson(["message" => "Offers fetched successfully."]);
-        $data = $response->decodeResponseJson()["data"]["offers"]['data'];
+        $data = $response->decodeResponseJson()["data"];
         foreach ($data as $offer) {
             $this->assertEquals($offer["user_id"], $user->id);
         }
@@ -38,11 +37,10 @@ class ViewOffersTest extends TestCase
         Sanctum::actingAs($user);
 
         factory(Offer::class, 30)->create(['user_id' => $user->id]);
-        $response = $this->get('/api/user-offers');
+        $response = $this->post('/api/user-offers');
         $response->assertStatus(200);
-        $response->assertJson(["message" => "Offers fetched successfully."]);
-        $response->assertJson(["data" => ["offers" => ['pagination' => ['per_page' => self::PER_PAGE]]]]);
-        $data = $response->decodeResponseJson()["data"]["offers"]['data'];
+        $response->assertJson(['meta' => ['per_page' => self::PER_PAGE]]);
+        $data = $response->decodeResponseJson()["data"];
         foreach ($data as $offer) {
             $this->assertEquals($offer["user_id"], $user->id);
         }
@@ -57,13 +55,12 @@ class ViewOffersTest extends TestCase
         $cat2 = factory(OfferCategory::class)->create();
         factory(Offer::class, 10)->create(["category_id" => $cat1->id, 'user_id' => $user->id]);
         factory(Offer::class, 20)->create(["category_id" => $cat2->id, 'user_id' => $user->id]);
-        $response = $this->get('/api/user-offers?category_id=' . $cat1->id);
-        $data = $response->decodeResponseJson()["data"]["offers"]['data'];
+        $response = $this->post('/api/user-offers?category_id=' . $cat1->id);
+        $data = $response->decodeResponseJson()["data"];
         foreach ($data as $offer) {
             $this->assertEquals($offer["category"]["name"], $cat1->name);
         }
         $response->assertStatus(200);
-        $response->assertJson(["message" => "Offers fetched successfully."]);
-        $response->assertJson(["data" => ["offers" => ['pagination' => ['total' => 10]]]]);
+        $response->assertJson(['meta' => ['total' => 10]]);
     }
 }

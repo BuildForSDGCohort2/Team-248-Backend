@@ -36,7 +36,7 @@ class RetrieveUserOffersService
             $userOffers  = $this->offerRepository->findWhere($filters)->paginate(self::PER_PAGE);
             $offer_data = OfferCollection::make($userOffers)->isOwner(true);
 
-            return new SuccessResource(Response::HTTP_OK, "Offers fetched successfully.", ["offers" => $offer_data]);
+            return $offer_data;
         } catch (Exception $e) {
             return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }

@@ -14,7 +14,6 @@ class OfferCollection extends ResourceCollection
      */
     private $isOwner = false;
     private $isApplicant = false;
-    private $applicant_data = null;
 
     public function isOwner($bool = true)
     {
@@ -28,10 +27,6 @@ class OfferCollection extends ResourceCollection
         return $this;
     }
 
-    public function setApplicantData($applicant_data){
-        $this->applicant_data = $applicant_data;
-        return $this;
-    }
 
     public function toArray($request)
     {
@@ -40,12 +35,10 @@ class OfferCollection extends ResourceCollection
                 'data'  =>
                     $this->collection->map(function (Offer $resource) use ($request) {
                         if($this->isApplicant){
-                            return $resource->isApplicant($this->isApplicant)
-                                ->setApplicantData($this->applicant_data)->toArray($request);
+                            return $resource->isApplicant($this->isApplicant)->toArray($request);
                         }
                         return $resource->isOwner($this->isOwner)->toArray($request);
                     })->all(),
-                'pagination' => Arr::except($this->resource->toArray(), 'data'),
         ];
     }
 }
