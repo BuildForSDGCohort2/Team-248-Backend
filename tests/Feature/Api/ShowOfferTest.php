@@ -45,7 +45,7 @@ class ShowOfferTest extends TestCase
         $response = $this->get('/api/offers/'.$offer->id);
 
         $response->assertStatus(200);
-        $response->assertJsonStructure([ 'message', 'data' => [
+        $response->assertJsonStructure(['data' => [
             'id',
             'applicants',
             'status'
@@ -70,7 +70,7 @@ class ShowOfferTest extends TestCase
         $response = $this->get('/api/offers/'.$offer->id);
 
         $response->assertStatus(200);
-        $response->assertJsonStructure([ 'message', 'data' => [
+        $response->assertJsonStructure(['data' => [
             'id',
             'application_data',
         ]]);

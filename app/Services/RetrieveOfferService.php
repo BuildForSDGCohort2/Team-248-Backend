@@ -35,11 +35,10 @@ class RetrieveOfferService
                 if($user->id == $offer->user_id){ // user is the owner of the offer
                     $offer_data = \App\Http\Resources\Offer::make($offer)->isOwner();
                 } else if($application){ //user applied for this offer
-                    $offer_data = \App\Http\Resources\Offer::make($offer)->isApplicant()
-                        ->setApplicantData($application);
+                    $offer_data = \App\Http\Resources\Offer::make($offer)->isApplicant();
                 }
             }
-            return new SuccessResource(Response::HTTP_OK, __("Offer retrieved successfully."), $offer_data);
+            return $offer_data;
         } catch (Exception $e) {
             Log::info($e);
             return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, __("Internal Server Error"));
