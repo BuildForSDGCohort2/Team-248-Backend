@@ -12,4 +12,14 @@ class OfferRepository extends BaseRepository
     {
         $this->model = new Offer();
     }
+
+    public function getAppliedOffers($user_id, $status_id){
+        $this->model = $this->model->whereHas('offerUsers', function ($query) use($user_id, $status_id){
+            $query->where('user_id', $user_id);
+            if($status_id) {
+                $query->where('status_id', $status_id);
+            }
+        });
+        return $this;
+    }
 }
