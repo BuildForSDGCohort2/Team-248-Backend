@@ -189,6 +189,33 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET api/user</code></p>
 <!-- END_2b6e5a4b188cb183c7e59558cce36cb6 -->
+<!-- START_9f156b66d7daeebe829b03e4cf33a50f -->
+<h2>api/profile/updatePassword</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://localhost/api/profile/updatePassword" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/profile/updatePassword"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/profile/updatePassword</code></p>
+<!-- END_9f156b66d7daeebe829b03e4cf33a50f -->
 <!-- START_a45eaa0bc07a2833fc15fdfb8cd32142 -->
 <h2>Create an offer</h2>
 <p>Enables the user to create a new offer</p>
@@ -199,7 +226,7 @@ fetch(url, {
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":14,"start_at":"aliquam","end_at":"reprehenderit","price_per_hour":42.66323185,"address":"aut","preferred_qualifications":"qui"}'
+    -d '{"category_id":19,"start_at":"illo","end_at":"quia","price_per_hour":1.24172,"address":"ducimus","preferred_qualifications":"voluptatem"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers"
@@ -211,12 +238,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 14,
-    "start_at": "aliquam",
-    "end_at": "reprehenderit",
-    "price_per_hour": 42.66323185,
-    "address": "aut",
-    "preferred_qualifications": "qui"
+    "category_id": 19,
+    "start_at": "illo",
+    "end_at": "quia",
+    "price_per_hour": 1.24172,
+    "address": "ducimus",
+    "preferred_qualifications": "voluptatem"
 }
 
 fetch(url, {
@@ -323,7 +350,7 @@ fetch(url, {
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":4,"start_at":"non","end_at":"suscipit","price_per_hour":6379.715,"address":"similique","preferred_qualifications":"voluptatem"}'
+    -d '{"category_id":7,"start_at":"rerum","end_at":"provident","price_per_hour":1.5171469,"address":"in","preferred_qualifications":"voluptatem"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers/1"
@@ -335,11 +362,11 @@ let headers = {
 };
 
 let body = {
-    "category_id": 4,
-    "start_at": "non",
-    "end_at": "suscipit",
-    "price_per_hour": 6379.715,
-    "address": "similique",
+    "category_id": 7,
+    "start_at": "rerum",
+    "end_at": "provident",
+    "price_per_hour": 1.5171469,
+    "address": "in",
     "preferred_qualifications": "voluptatem"
 }
 
@@ -461,6 +488,57 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
+<!-- START_f7b14e58800200c9dd82259343ecea98 -->
+<h2>Delete an offer</h2>
+<p>Enables the user to delete an existing offer</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://localhost/api/offers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/offers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Offer deleted successfully."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/offers/{offer}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The ID of the offer.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_f7b14e58800200c9dd82259343ecea98 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

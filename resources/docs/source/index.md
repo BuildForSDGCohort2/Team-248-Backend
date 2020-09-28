@@ -215,6 +215,43 @@ fetch(url, {
 
 <!-- END_2b6e5a4b188cb183c7e59558cce36cb6 -->
 
+<!-- START_9f156b66d7daeebe829b03e4cf33a50f -->
+## api/profile/updatePassword
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/profile/updatePassword" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/profile/updatePassword"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/profile/updatePassword`
+
+
+<!-- END_9f156b66d7daeebe829b03e4cf33a50f -->
+
 <!-- START_a45eaa0bc07a2833fc15fdfb8cd32142 -->
 ## Create an offer
 
@@ -227,7 +264,7 @@ curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":14,"start_at":"aliquam","end_at":"reprehenderit","price_per_hour":42.66323185,"address":"aut","preferred_qualifications":"qui"}'
+    -d '{"category_id":19,"start_at":"illo","end_at":"quia","price_per_hour":1.24172,"address":"ducimus","preferred_qualifications":"voluptatem"}'
 
 ```
 
@@ -242,12 +279,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 14,
-    "start_at": "aliquam",
-    "end_at": "reprehenderit",
-    "price_per_hour": 42.66323185,
-    "address": "aut",
-    "preferred_qualifications": "qui"
+    "category_id": 19,
+    "start_at": "illo",
+    "end_at": "quia",
+    "price_per_hour": 1.24172,
+    "address": "ducimus",
+    "preferred_qualifications": "voluptatem"
 }
 
 fetch(url, {
@@ -325,7 +362,7 @@ curl -X PUT \
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":4,"start_at":"non","end_at":"suscipit","price_per_hour":6379.715,"address":"similique","preferred_qualifications":"voluptatem"}'
+    -d '{"category_id":7,"start_at":"rerum","end_at":"provident","price_per_hour":1.5171469,"address":"in","preferred_qualifications":"voluptatem"}'
 
 ```
 
@@ -340,11 +377,11 @@ let headers = {
 };
 
 let body = {
-    "category_id": 4,
-    "start_at": "non",
-    "end_at": "suscipit",
-    "price_per_hour": 6379.715,
-    "address": "similique",
+    "category_id": 7,
+    "start_at": "rerum",
+    "end_at": "provident",
+    "price_per_hour": 1.5171469,
+    "address": "in",
     "preferred_qualifications": "voluptatem"
 }
 
@@ -423,5 +460,57 @@ Parameter | Type | Status | Description
         `preferred_qualifications` | string |  optional  | optional the address where the offer takes place.
     
 <!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
+
+<!-- START_f7b14e58800200c9dd82259343ecea98 -->
+## Delete an offer
+
+Enables the user to delete an existing offer
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/offers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/offers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "message": "Offer deleted successfully."
+}
+```
+
+### HTTP Request
+`DELETE api/offers/{offer}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the offer.
+
+<!-- END_f7b14e58800200c9dd82259343ecea98 -->
 
 

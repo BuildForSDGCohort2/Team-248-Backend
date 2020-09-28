@@ -6,6 +6,7 @@ use App\Http\Requests\OfferRequest;
 use App\Http\Resources\ErrorResource;
 use App\Models\Offer;
 use App\Services\CreateOfferService;
+use App\Services\DeleteOfferService;
 use App\Services\UpdateOfferService;
 use Exception;
 use Illuminate\Http\Request;
@@ -119,6 +120,23 @@ class OfferController extends Controller
      *
      */
     public function update(OfferRequest $request, Offer $offer, UpdateOfferService $service)
+    {
+        return $service->execute($request, $offer);
+    }
+
+    /**
+     * Delete an offer
+     *
+     * Enables the user to delete an existing offer
+     * 
+     * @urlParam  id required The ID of the offer.
+     * 
+     * @response  200 {
+     *  "message": "Offer deleted successfully."
+     *}
+     *
+     */
+    public function destroy(Request $request, Offer $offer, DeleteOfferService $service)
     {
         return $service->execute($request, $offer);
     }

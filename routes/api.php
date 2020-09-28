@@ -22,3 +22,4 @@ Route::put('profile/updatePassword', 'AuthController@updatePassword')->name('pro
 
 Route::post('/offers', "OfferController@store")->middleware('auth:sanctum');
 Route::put('/offers/{offer}', "OfferController@update")->middleware('auth:sanctum');
+Route::delete('/offers/{offer}', "OfferController@destroy")->middleware('auth:sanctum');
