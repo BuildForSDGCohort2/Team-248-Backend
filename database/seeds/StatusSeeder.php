@@ -12,6 +12,6 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        factory(Status::class, 5)->create();
+        factory(Status::class)->create(["name" => "New", "description" => "A new offer was created", "code" => "new"]);
     }
 }
