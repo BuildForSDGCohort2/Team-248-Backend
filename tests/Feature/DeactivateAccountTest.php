@@ -16,7 +16,7 @@ class DeactivateAccountTest extends TestCase
         $user = factory(User::class)->create(["is_active"=>1]);
         Sanctum::actingAs($user);
 
-        $response = $this->patch("/api/users/$user->id/deactivate");
+        $response = $this->patch("/api/users/deactivate");
 
         $response->assertStatus(200);
         $response->assertJson(["message" => "Account deactivated successfully."]);
@@ -30,22 +30,8 @@ class DeactivateAccountTest extends TestCase
         $response = $this->withHeaders([
             "Content-Type" => "application/json",
             "Accept" => "application/json"
-        ])->patch("/api/users/$user->id/deactivate");
+        ])->patch("/api/users/deactivate");
         $response->assertStatus(401);
         $response->assertJson(["message" => "Unauthenticated."]);
-    }
-
-    public function testDeactivateAccountUnauthorized()
-    {
-        $user = factory(User::class)->create(["is_active"=>1]);
-        $user2 = factory(User::class)->create(["is_active"=>1]);
-        Sanctum::actingAs($user);
-
-        $response = $this->withHeaders([
-            "Content-Type" => "application/json",
-            "Accept" => "application/json"
-        ])->patch("/api/users/$user2->id/deactivate");
-        $response->assertStatus(403);
-        $response->assertJson(["data" => ["message" => "This action is unathorized."]]);
     }
 }

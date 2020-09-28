@@ -19,13 +19,10 @@ class DeactivateAccountService
         $this->userRepository = $userRepository;
     }
 
-    public function execute(Request $request, User $user)
+    public function execute(Request $request)
     {
         try {
-            if ($request->user()->id != $user->id) {
-                return new ErrorResource(Response::HTTP_FORBIDDEN, "This action is unathorized.");
-            }
-            $this->userRepository->update(["is_active" => 0], $user->id);
+            $this->userRepository->update(["is_active" => 0], $request->user()->id);
             $request->user()->currentAccessToken()->delete();
             return new SuccessResource(Response::HTTP_OK, "Account deactivated successfully.");
         } catch (Exception $e) {

@@ -20,4 +20,4 @@ Route::get('user', 'AuthController@user')->name('getUser')->middleware('auth:san
 
 Route::post('/offers', "OfferController@store");
 
-Route::patch('/users/{user}/deactivate', "UserController@deactivate")->middleware('auth:sanctum');
+Route::patch('/users/deactivate', "UserController@deactivate")->middleware('auth:sanctum');

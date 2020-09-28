@@ -26,8 +26,8 @@ class UserController extends Controller
      *}
      *
      */
-    public function deactivate(Request $request, User $user, DeactivateAccountService $service)
+    public function deactivate(Request $request, DeactivateAccountService $service)
     {
-        return $service->execute($request, $user);
+        return $service->execute($request);
     }
 }
