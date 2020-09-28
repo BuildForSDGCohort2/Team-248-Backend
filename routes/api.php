@@ -20,4 +20,5 @@ Route::get('user', 'AuthController@user')->name('getUser')->middleware('auth:san
 Route::put('profile/updatePassword', 'AuthController@updatePassword')->name('profile.updatePassword')->middleware('auth:sanctum');
 
 
-Route::post('/offers', "OfferController@store");
+Route::post('/offers', "OfferController@store")->middleware('auth:sanctum');
+Route::put('/offers/{offer}', "OfferController@update")->middleware('auth:sanctum');
