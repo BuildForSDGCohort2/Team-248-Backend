@@ -215,6 +215,43 @@ fetch(url, {
 
 <!-- END_2b6e5a4b188cb183c7e59558cce36cb6 -->
 
+<!-- START_9f156b66d7daeebe829b03e4cf33a50f -->
+## api/profile/updatePassword
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost/api/profile/updatePassword" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/profile/updatePassword"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/profile/updatePassword`
+
+
+<!-- END_9f156b66d7daeebe829b03e4cf33a50f -->
+
 <!-- START_a45eaa0bc07a2833fc15fdfb8cd32142 -->
 ## Create an offer
 
@@ -227,7 +264,7 @@ curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":14,"start_at":"aliquam","end_at":"reprehenderit","price_per_hour":42.66323185,"address":"aut","preferred_qualifications":"qui"}'
+    -d '{"category_id":8,"start_at":"non","end_at":"nihil","price_per_hour":1027,"address":"omnis","preferred_qualifications":"laborum"}'
 
 ```
 
@@ -242,12 +279,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 14,
-    "start_at": "aliquam",
-    "end_at": "reprehenderit",
-    "price_per_hour": 42.66323185,
-    "address": "aut",
-    "preferred_qualifications": "qui"
+    "category_id": 8,
+    "start_at": "non",
+    "end_at": "nihil",
+    "price_per_hour": 1027,
+    "address": "omnis",
+    "preferred_qualifications": "laborum"
 }
 
 fetch(url, {
@@ -325,7 +362,7 @@ curl -X PUT \
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":4,"start_at":"non","end_at":"suscipit","price_per_hour":6379.715,"address":"similique","preferred_qualifications":"voluptatem"}'
+    -d '{"category_id":5,"start_at":"rerum","end_at":"quo","price_per_hour":47251.326,"address":"maiores","preferred_qualifications":"itaque"}'
 
 ```
 
@@ -340,12 +377,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 4,
-    "start_at": "non",
-    "end_at": "suscipit",
-    "price_per_hour": 6379.715,
-    "address": "similique",
-    "preferred_qualifications": "voluptatem"
+    "category_id": 5,
+    "start_at": "rerum",
+    "end_at": "quo",
+    "price_per_hour": 47251.326,
+    "address": "maiores",
+    "preferred_qualifications": "itaque"
 }
 
 fetch(url, {
@@ -423,5 +460,42 @@ Parameter | Type | Status | Description
         `preferred_qualifications` | string |  optional  | optional the address where the offer takes place.
     
 <!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
+
+<!-- START_49efb800fa17a25dfa0396cdeaae588c -->
+## api/user-offers
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/user-offers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/user-offers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/user-offers`
+
+
+<!-- END_49efb800fa17a25dfa0396cdeaae588c -->
 
 
