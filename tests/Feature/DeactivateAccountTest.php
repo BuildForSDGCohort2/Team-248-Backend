@@ -25,8 +25,6 @@ class DeactivateAccountTest extends TestCase
 
     public function testDeactivateAccountUnauthenticated()
     {
-        $user = factory(User::class)->create(["is_active"=>1]);
-
         $response = $this->withHeaders([
             "Content-Type" => "application/json",
             "Accept" => "application/json"
