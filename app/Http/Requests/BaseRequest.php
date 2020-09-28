@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests;
 
 use App\Http\Resources\ErrorResource;
@@ -41,6 +42,11 @@ class BaseRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    protected function failedAuthorization()
+    {
+        throw new HttpResponseException(response()->json(new ErrorResource(Response::HTTP_FORBIDDEN, "This action is unauthorized."), 403));
     }
 
     protected function failedValidation(Validator $validator)

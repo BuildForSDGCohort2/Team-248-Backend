@@ -17,7 +17,9 @@ class OfferRequest extends BaseRequest
      */
     public function authorize()
     {
-
+        if ($this->user() && $this->offer && $this->user()->id != $this->offer->user_id) {
+            return false;
+        }
         return true;
     }
     /**
@@ -28,7 +30,6 @@ class OfferRequest extends BaseRequest
     public function rules()
     {
         return [
-            "user_id" => "required",
             "category_id" => "required",
             "start_at" => "required|date",
             "end_at" => "required|date|after:start_at",
