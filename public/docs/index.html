@@ -45,19 +45,189 @@
       <div class="content">
           <!-- START_INFO -->
 <h1>Info</h1>
-<p>Welcome to the generated API reference.
-<a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
+<p>Welcome to the generated API reference.</p>
 <!-- END_INFO -->
 <h1>general</h1>
+<!-- START_4dfafe7f87ec132be3c8990dd1fa9078 -->
+<h2>Return an empty response simply to trigger the storage of the CSRF cookie in the browser.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/sanctum/csrf-cookie" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/sanctum/csrf-cookie"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET sanctum/csrf-cookie</code></p>
+<!-- END_4dfafe7f87ec132be3c8990dd1fa9078 -->
+<!-- START_d7b7952e7fdddc07c978c9bdaf757acf -->
+<h2>api/register</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/register" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/register"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/register</code></p>
+<!-- END_d7b7952e7fdddc07c978c9bdaf757acf -->
+<!-- START_c3fa189a6c95ca36ad6ac4791a873d23 -->
+<h2>api/login</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/login" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/login"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/login</code></p>
+<!-- END_c3fa189a6c95ca36ad6ac4791a873d23 -->
+<!-- START_61739f3220a224b34228600649230ad1 -->
+<h2>api/logout</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/logout" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/logout"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/logout</code></p>
+<!-- END_61739f3220a224b34228600649230ad1 -->
+<!-- START_2b6e5a4b188cb183c7e59558cce36cb6 -->
+<h2>api/user</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/user" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/user"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/user</code></p>
+<!-- END_2b6e5a4b188cb183c7e59558cce36cb6 -->
+<!-- START_9f156b66d7daeebe829b03e4cf33a50f -->
+<h2>api/profile/updatePassword</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://localhost/api/profile/updatePassword" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/profile/updatePassword"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/profile/updatePassword</code></p>
+<!-- END_9f156b66d7daeebe829b03e4cf33a50f -->
 <!-- START_a45eaa0bc07a2833fc15fdfb8cd32142 -->
-<h2>Store a newly created resource in storage.</h2>
+<h2>Create an offer</h2>
+<p>Enables the user to create a new offer</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"category_id":2,"start_at":"eligendi","end_at":"excepturi","price_per_hour":60.4029,"address":"nisi","preferred_qualifications":"inventore"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers"
 );
@@ -67,26 +237,269 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "category_id": 2,
+    "start_at": "eligendi",
+    "end_at": "excepturi",
+    "price_per_hour": 60.4029,
+    "address": "nisi",
+    "preferred_qualifications": "inventore"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Offer created successfully.",
+    "data": {
+        "id": 51
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "The given data was invalid.",
+    "errors": {
+        "user_id": [
+            "The user id field is required."
+        ],
+        "category_id": [
+            "The category id field is required."
+        ],
+        "start_at": [
+            "The start at field is required."
+        ],
+        "end_at": [
+            "The end at field is required."
+        ],
+        "price_per_hour": [
+            "The price per hour field is required."
+        ],
+        "address": [
+            "The address field is required."
+        ]
+    }
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/offers</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>the id of the offer category.</td>
+</tr>
+<tr>
+<td><code>start_at</code></td>
+<td>datetime</td>
+<td>required</td>
+<td>the start date and time of the offer.</td>
+</tr>
+<tr>
+<td><code>end_at</code></td>
+<td>datetime</td>
+<td>required</td>
+<td>the end date and time of the offer.</td>
+</tr>
+<tr>
+<td><code>price_per_hour</code></td>
+<td>float</td>
+<td>required</td>
+<td>the price per hour offered.</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>string</td>
+<td>required</td>
+<td>the address where the offer takes place.</td>
+</tr>
+<tr>
+<td><code>preferred_qualifications</code></td>
+<td>string</td>
+<td>optional</td>
+<td>optional the address where the offer takes place.</td>
+</tr>
+</tbody>
+</table>
 <!-- END_a45eaa0bc07a2833fc15fdfb8cd32142 -->
-<!-- START_737ccfb685073c55ab973d56082898ff -->
-<h2>api/forget-password</h2>
+<!-- START_d8ee1935637e83c8bfa5e3600a25f8c2 -->
+<h2>Update an offer</h2>
+<p>Enables the user to update an existing offer</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://localhost/api/offers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"category_id":1,"start_at":"voluptate","end_at":"sapiente","price_per_hour":221633.8,"address":"fuga","preferred_qualifications":"voluptate"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/offers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "category_id": 1,
+    "start_at": "voluptate",
+    "end_at": "sapiente",
+    "price_per_hour": 221633.8,
+    "address": "fuga",
+    "preferred_qualifications": "voluptate"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Offer updated successfully.",
+    "data": {
+        "id": 2
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "The given data was invalid.",
+    "errors": {
+        "user_id": [
+            "The user id field is required."
+        ],
+        "category_id": [
+            "The category id field is required."
+        ],
+        "start_at": [
+            "The start at field is required."
+        ],
+        "end_at": [
+            "The end at field is required."
+        ],
+        "price_per_hour": [
+            "The price per hour field is required."
+        ],
+        "address": [
+            "The address field is required."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Resource not found.",
+    "errors": ""
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/offers/{offer}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The ID of the offer.</td>
+</tr>
+</tbody>
+</table>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>the id of the offer category.</td>
+</tr>
+<tr>
+<td><code>start_at</code></td>
+<td>datetime</td>
+<td>required</td>
+<td>the start date and time of the offer.</td>
+</tr>
+<tr>
+<td><code>end_at</code></td>
+<td>datetime</td>
+<td>required</td>
+<td>the end date and time of the offer.</td>
+</tr>
+<tr>
+<td><code>price_per_hour</code></td>
+<td>float</td>
+<td>required</td>
+<td>the price per hour offered.</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>string</td>
+<td>required</td>
+<td>the address where the offer takes place.</td>
+</tr>
+<tr>
+<td><code>preferred_qualifications</code></td>
+<td>string</td>
+<td>optional</td>
+<td>optional the address where the offer takes place.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
+<!-- START_1c3db579164b812f790141e36fb93fd7 -->
+<h2>Create an offer application</h2>
+<p>Enables the user to apply an offer</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/forget-password" \
+    "http://localhost/api/offers/1/apply" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/forget-password"
+    "http://localhost/api/offers/1/apply"
 );
 
 let headers = {
@@ -100,9 +513,78 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (201):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Application created successfully.",
+    "data": {
+        "id": 1
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Resource not found.",
+    "errors": ""
+}</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "message": "This offer has already been approved.",
+        "errors": ""
+    }
+}</code></pre>
 <h3>HTTP Request</h3>
-<p><code>POST api/forget-password</code></p>
-<!-- END_737ccfb685073c55ab973d56082898ff -->
+<p><code>POST api/offers/{offer}/apply</code></p>
+<!-- END_1c3db579164b812f790141e36fb93fd7 -->
+<!-- START_1897f762d361886c099adb68e44342ed -->
+<h2>Cancel an application</h2>
+<p>Enables the user to cancel his application for an offer</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PATCH \
+    "http://localhost/api/applications/1/cancel" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/applications/1/cancel"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Application cancelled successfully.",
+    "data": ""
+}</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "message": "This action is unauthorized.",
+        "errors": ""
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PATCH api/applications/{application}/cancel</code></p>
+<!-- END_1897f762d361886c099adb68e44342ed -->
 <!-- START_6d3061d375666b8cf6babe163b36f250 -->
 <h2>api/reset-password</h2>
 <blockquote>
@@ -130,6 +612,33 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST api/reset-password</code></p>
 <!-- END_6d3061d375666b8cf6babe163b36f250 -->
+<!-- START_737ccfb685073c55ab973d56082898ff -->
+<h2>api/forget-password</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/forget-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/forget-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/forget-password</code></p>
+<!-- END_737ccfb685073c55ab973d56082898ff -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">
