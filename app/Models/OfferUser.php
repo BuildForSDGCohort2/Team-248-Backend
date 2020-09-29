@@ -27,4 +27,12 @@ class OfferUser extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
