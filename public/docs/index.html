@@ -226,7 +226,7 @@ fetch(url, {
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":13,"start_at":"quo","end_at":"facere","price_per_hour":166129608.27620378,"address":"et","preferred_qualifications":"molestias"}'
+    -d '{"category_id":8,"start_at":"non","end_at":"nihil","price_per_hour":1027,"address":"omnis","preferred_qualifications":"laborum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers"
@@ -238,12 +238,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 13,
-    "start_at": "quo",
-    "end_at": "facere",
-    "price_per_hour": 166129608.27620378,
-    "address": "et",
-    "preferred_qualifications": "molestias"
+    "category_id": 8,
+    "start_at": "non",
+    "end_at": "nihil",
+    "price_per_hour": 1027,
+    "address": "omnis",
+    "preferred_qualifications": "laborum"
 }
 
 fetch(url, {
@@ -350,7 +350,7 @@ fetch(url, {
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":15,"start_at":"ea","end_at":"quod","price_per_hour":144.2,"address":"molestias","preferred_qualifications":"dolore"}'
+    -d '{"category_id":5,"start_at":"rerum","end_at":"quo","price_per_hour":47251.326,"address":"maiores","preferred_qualifications":"itaque"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers/1"
@@ -362,12 +362,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 15,
-    "start_at": "ea",
-    "end_at": "quod",
-    "price_per_hour": 144.2,
-    "address": "molestias",
-    "preferred_qualifications": "dolore"
+    "category_id": 5,
+    "start_at": "rerum",
+    "end_at": "quo",
+    "price_per_hour": 47251.326,
+    "address": "maiores",
+    "preferred_qualifications": "itaque"
 }
 
 fetch(url, {
@@ -488,17 +488,17 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
-<!-- START_8685c256eacc0cca0fc32f11c8fd87ea -->
-<h2>api/applied-offers</h2>
+<!-- START_49efb800fa17a25dfa0396cdeaae588c -->
+<h2>api/user-offers</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/applied-offers" \
+    "http://localhost/api/user-offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/applied-offers"
+    "http://localhost/api/user-offers"
 );
 
 let headers = {
@@ -513,8 +513,8 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <h3>HTTP Request</h3>
-<p><code>POST api/applied-offers</code></p>
-<!-- END_8685c256eacc0cca0fc32f11c8fd87ea -->
+<p><code>POST api/user-offers</code></p>
+<!-- END_49efb800fa17a25dfa0396cdeaae588c -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

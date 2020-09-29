@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
 class User extends Authenticatable
 {
-    use HasApiTokens, SoftDeletes;
+    use HasApiTokens, SoftDeletes, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -44,6 +45,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function getEmailForPasswordReset()
+    {
+        return $this->email;
     }
 
     public function offerUsers(){
