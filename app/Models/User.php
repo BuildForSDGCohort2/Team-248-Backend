@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->email;
     }
+
+    public function offerUsers(){
+        return $this->hasMany(\App\Models\OfferUser::class, 'user_id');
+    }
 }

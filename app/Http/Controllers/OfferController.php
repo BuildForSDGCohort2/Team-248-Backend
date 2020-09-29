@@ -10,6 +10,8 @@ use App\Services\UpdateOfferService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Services\RetrieveUserOffersService;
+use App\Http\Requests\UserOffersRequest;
 
 class OfferController extends Controller
 {
@@ -121,5 +123,15 @@ class OfferController extends Controller
     public function update(OfferRequest $request, Offer $offer, UpdateOfferService $service)
     {
         return $service->execute($request, $offer);
+    }
+
+    /**
+     * @param UserOffersRequest $request
+     * @param RetrieveUserOffersService $service
+     * @return \App\Http\Resources\ErrorResource|\App\Http\Resources\SuccessResource
+     */
+    public function userOffers(UserOffersRequest $request, RetrieveUserOffersService $service)
+    {
+        return $service->execute($request);
     }
 }
