@@ -19,7 +19,8 @@ Route::post('logout', 'AuthController@logout')->name('logout')->middleware('auth
 Route::get('user', 'AuthController@user')->name('getUser')->middleware('auth:sanctum');
 Route::put('profile/updatePassword', 'AuthController@updatePassword')->name('profile.updatePassword')->middleware('auth:sanctum');
 
-
 Route::post('/offers', "OfferController@store")->middleware('auth:sanctum');
 Route::put('/offers/{offer}', "OfferController@update")->middleware('auth:sanctum');
+Route::post('/offers/{offer}/apply', "OfferUserController@store")->middleware('auth:sanctum');
+Route::patch('/applications/{application}/cancel', "OfferUserController@cancel")->middleware('auth:sanctum');
 Route::post('/user-offers', "OfferController@userOffers")->middleware('auth:sanctum');
