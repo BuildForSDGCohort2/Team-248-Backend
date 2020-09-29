@@ -23,3 +23,4 @@ Route::post('/offers', "OfferController@store")->middleware('auth:sanctum');
 Route::put('/offers/{offer}', "OfferController@update")->middleware('auth:sanctum');
 Route::post('/offers/{offer}/apply', "OfferUserController@store")->middleware('auth:sanctum');
 Route::patch('/applications/{application}/cancel', "OfferUserController@cancel")->middleware('auth:sanctum');
+Route::post('reset-password', 'API\Auth\ResetPasswordController')->name('password.reset');
