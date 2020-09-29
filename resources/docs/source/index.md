@@ -264,7 +264,7 @@ curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":8,"start_at":"non","end_at":"nihil","price_per_hour":1027,"address":"omnis","preferred_qualifications":"laborum"}'
+    -d '{"category_id":8,"start_at":"dolores","end_at":"ut","price_per_hour":25529,"address":"voluptatibus","preferred_qualifications":"aut"}'
 
 ```
 
@@ -280,11 +280,11 @@ let headers = {
 
 let body = {
     "category_id": 8,
-    "start_at": "non",
-    "end_at": "nihil",
-    "price_per_hour": 1027,
-    "address": "omnis",
-    "preferred_qualifications": "laborum"
+    "start_at": "dolores",
+    "end_at": "ut",
+    "price_per_hour": 25529,
+    "address": "voluptatibus",
+    "preferred_qualifications": "aut"
 }
 
 fetch(url, {
@@ -362,7 +362,7 @@ curl -X PUT \
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":5,"start_at":"rerum","end_at":"quo","price_per_hour":47251.326,"address":"maiores","preferred_qualifications":"itaque"}'
+    -d '{"category_id":5,"start_at":"illum","end_at":"est","price_per_hour":72596887,"address":"non","preferred_qualifications":"consequatur"}'
 
 ```
 
@@ -378,11 +378,11 @@ let headers = {
 
 let body = {
     "category_id": 5,
-    "start_at": "rerum",
-    "end_at": "quo",
-    "price_per_hour": 47251.326,
-    "address": "maiores",
-    "preferred_qualifications": "itaque"
+    "start_at": "illum",
+    "end_at": "est",
+    "price_per_hour": 72596887,
+    "address": "non",
+    "preferred_qualifications": "consequatur"
 }
 
 fetch(url, {
@@ -460,6 +460,169 @@ Parameter | Type | Status | Description
         `preferred_qualifications` | string |  optional  | optional the address where the offer takes place.
     
 <!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
+
+<!-- START_1c3db579164b812f790141e36fb93fd7 -->
+## Create an offer application
+
+Enables the user to apply an offer
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/offers/1/apply" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/offers/1/apply"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (201):
+
+```json
+{
+    "message": "Application created successfully.",
+    "data": {
+        "id": 1
+    }
+}
+```
+> Example response (404):
+
+```json
+{
+    "message": "Resource not found.",
+    "errors": ""
+}
+```
+> Example response (422):
+
+```json
+{
+    "data": {
+        "message": "This offer has already been approved.",
+        "errors": ""
+    }
+}
+```
+
+### HTTP Request
+`POST api/offers/{offer}/apply`
+
+
+<!-- END_1c3db579164b812f790141e36fb93fd7 -->
+
+<!-- START_1897f762d361886c099adb68e44342ed -->
+## Cancel an application
+
+Enables the user to cancel his application for an offer
+
+> Example request:
+
+```bash
+curl -X PATCH \
+    "http://localhost/api/applications/1/cancel" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/applications/1/cancel"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "message": "Application cancelled successfully.",
+    "data": ""
+}
+```
+> Example response (401):
+
+```json
+{
+    "data": {
+        "message": "This action is unauthorized.",
+        "errors": ""
+    }
+}
+```
+
+### HTTP Request
+`PATCH api/applications/{application}/cancel`
+
+
+<!-- END_1897f762d361886c099adb68e44342ed -->
+
+<!-- START_6d3061d375666b8cf6babe163b36f250 -->
+## api/reset-password
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/reset-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/reset-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/reset-password`
+
+
+<!-- END_6d3061d375666b8cf6babe163b36f250 -->
 
 <!-- START_49efb800fa17a25dfa0396cdeaae588c -->
 ## api/user-offers

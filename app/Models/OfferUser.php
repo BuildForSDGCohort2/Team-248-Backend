@@ -11,8 +11,6 @@ class OfferUser extends Model
 
     protected $guarded = [];
 
-    protected $table = 'offer_user';
-
     /**
      * The attributes that are mass assignable.
      *
