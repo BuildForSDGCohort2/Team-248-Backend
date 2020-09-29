@@ -1,7 +1,11 @@
 <?php
+
 namespace App\Http\Requests;
 
+use App\Http\Resources\ErrorResource;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
 
 /**
  * Description of BaseRequest
@@ -36,5 +40,10 @@ class BaseRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    protected function failedAuthorization()
+    {
+        throw new HttpResponseException(response()->json(new ErrorResource(Response::HTTP_FORBIDDEN, "This action is unauthorized."), 403));
     }
 }
