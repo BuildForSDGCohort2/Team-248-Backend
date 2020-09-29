@@ -226,7 +226,7 @@ fetch(url, {
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":19,"start_at":"illo","end_at":"quia","price_per_hour":1.24172,"address":"ducimus","preferred_qualifications":"voluptatem"}'
+    -d '{"category_id":8,"start_at":"non","end_at":"nihil","price_per_hour":1027,"address":"omnis","preferred_qualifications":"laborum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers"
@@ -238,12 +238,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 19,
-    "start_at": "illo",
-    "end_at": "quia",
-    "price_per_hour": 1.24172,
-    "address": "ducimus",
-    "preferred_qualifications": "voluptatem"
+    "category_id": 8,
+    "start_at": "non",
+    "end_at": "nihil",
+    "price_per_hour": 1027,
+    "address": "omnis",
+    "preferred_qualifications": "laborum"
 }
 
 fetch(url, {
@@ -350,7 +350,7 @@ fetch(url, {
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":7,"start_at":"rerum","end_at":"provident","price_per_hour":1.5171469,"address":"in","preferred_qualifications":"voluptatem"}'
+    -d '{"category_id":5,"start_at":"rerum","end_at":"quo","price_per_hour":47251.326,"address":"maiores","preferred_qualifications":"itaque"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers/1"
@@ -362,12 +362,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 7,
+    "category_id": 5,
     "start_at": "rerum",
-    "end_at": "provident",
-    "price_per_hour": 1.5171469,
-    "address": "in",
-    "preferred_qualifications": "voluptatem"
+    "end_at": "quo",
+    "price_per_hour": 47251.326,
+    "address": "maiores",
+    "preferred_qualifications": "itaque"
 }
 
 fetch(url, {
@@ -488,18 +488,17 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
-<!-- START_f7b14e58800200c9dd82259343ecea98 -->
-<h2>Delete an offer</h2>
-<p>Enables the user to delete an existing offer</p>
+<!-- START_49efb800fa17a25dfa0396cdeaae588c -->
+<h2>api/user-offers</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/api/offers/1" \
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/user-offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/offers/1"
+    "http://localhost/api/user-offers"
 );
 
 let headers = {
@@ -508,37 +507,14 @@ let headers = {
 };
 
 fetch(url, {
-    method: "DELETE",
+    method: "POST",
     headers: headers,
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Offer deleted successfully."
-}</code></pre>
 <h3>HTTP Request</h3>
-<p><code>DELETE api/offers/{offer}</code></p>
-<h4>URL Parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Status</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>id</code></td>
-<td>required</td>
-<td>The ID of the offer.</td>
-</tr>
-</tbody>
-</table>
-<!-- END_f7b14e58800200c9dd82259343ecea98 -->
+<p><code>POST api/user-offers</code></p>
+<!-- END_49efb800fa17a25dfa0396cdeaae588c -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

@@ -264,7 +264,7 @@ curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":19,"start_at":"illo","end_at":"quia","price_per_hour":1.24172,"address":"ducimus","preferred_qualifications":"voluptatem"}'
+    -d '{"category_id":8,"start_at":"non","end_at":"nihil","price_per_hour":1027,"address":"omnis","preferred_qualifications":"laborum"}'
 
 ```
 
@@ -279,12 +279,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 19,
-    "start_at": "illo",
-    "end_at": "quia",
-    "price_per_hour": 1.24172,
-    "address": "ducimus",
-    "preferred_qualifications": "voluptatem"
+    "category_id": 8,
+    "start_at": "non",
+    "end_at": "nihil",
+    "price_per_hour": 1027,
+    "address": "omnis",
+    "preferred_qualifications": "laborum"
 }
 
 fetch(url, {
@@ -362,7 +362,7 @@ curl -X PUT \
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":7,"start_at":"rerum","end_at":"provident","price_per_hour":1.5171469,"address":"in","preferred_qualifications":"voluptatem"}'
+    -d '{"category_id":5,"start_at":"rerum","end_at":"quo","price_per_hour":47251.326,"address":"maiores","preferred_qualifications":"itaque"}'
 
 ```
 
@@ -377,12 +377,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 7,
+    "category_id": 5,
     "start_at": "rerum",
-    "end_at": "provident",
-    "price_per_hour": 1.5171469,
-    "address": "in",
-    "preferred_qualifications": "voluptatem"
+    "end_at": "quo",
+    "price_per_hour": 47251.326,
+    "address": "maiores",
+    "preferred_qualifications": "itaque"
 }
 
 fetch(url, {
@@ -461,23 +461,21 @@ Parameter | Type | Status | Description
     
 <!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
 
-<!-- START_f7b14e58800200c9dd82259343ecea98 -->
-## Delete an offer
 
-Enables the user to delete an existing offer
-
+<!-- START_49efb800fa17a25dfa0396cdeaae588c -->
+## api/user-offers
 > Example request:
 
 ```bash
-curl -X DELETE \
-    "http://localhost/api/offers/1" \
+curl -X POST \
+    "http://localhost/api/user-offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/offers/1"
+    "http://localhost/api/user-offers"
 );
 
 let headers = {
@@ -486,7 +484,7 @@ let headers = {
 };
 
 fetch(url, {
-    method: "DELETE",
+    method: "POST",
     headers: headers,
 })
     .then(response => response.json())
@@ -494,23 +492,11 @@ fetch(url, {
 ```
 
 
-> Example response (200):
-
-```json
-{
-    "message": "Offer deleted successfully."
-}
-```
 
 ### HTTP Request
-`DELETE api/offers/{offer}`
+`POST api/user-offers`
 
-#### URL Parameters
 
-Parameter | Status | Description
---------- | ------- | ------- | -------
-    `id` |  required  | The ID of the offer.
-
-<!-- END_f7b14e58800200c9dd82259343ecea98 -->
+<!-- END_49efb800fa17a25dfa0396cdeaae588c -->
 
 
