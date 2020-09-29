@@ -49,10 +49,10 @@ class Offer extends Model
     public function applicants(){
         return $this->hasManyThrough(User::class,
             OfferUser::class,
-            'offer_user.offer_id',
+            'offer_users.offer_id',
             'users.id',
             'id',
-            'offer_user.user_id');
+            'offer_users.user_id');
     }
 
     public function offerUsers(){

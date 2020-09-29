@@ -63,7 +63,7 @@ class Offer extends JsonResource
     }
 
     public function setApplicantData($offer){
-        $application = $offer->offerUsers()->where('offer_user.user_id',
+        $application = $offer->offerUsers()->where('offer_users.user_id',
             Auth::guard('sanctum')->user()->id)->first();
         $this->applicant_data = $application;
         return $this;

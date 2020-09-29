@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
 
-use App\Services\OfferService;
 use App\Services\ViewOffersService;
 
-use App\Http\Resources\ErrorResource;
 use App\Models\Offer;
 use App\Services\CreateOfferService;
 use App\Services\DeleteOfferService;
 use App\Services\UpdateOfferService;
-use Exception;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Services\RetrieveUserOffersService;
 use App\Http\Requests\UserOffersRequest;
 
@@ -151,6 +147,8 @@ class OfferController extends Controller
     {
         return $service->execute($request, $offer);
     }
+
+    /**
      * @param UserOffersRequest $request
      * @param RetrieveUserOffersService $service
      * @return \App\Http\Resources\ErrorResource|\App\Http\Resources\SuccessResource

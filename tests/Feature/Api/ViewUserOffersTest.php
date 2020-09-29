@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class ViewOffersTest extends TestCase
+class ViewUserOffersTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
