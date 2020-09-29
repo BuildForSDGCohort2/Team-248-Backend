@@ -13,7 +13,7 @@ class CreateOfferUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('offer_user', function (Blueprint $table) {
+        Schema::create('offer_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('offer_id');
@@ -35,6 +35,6 @@ class CreateOfferUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offer_user');
+        Schema::dropIfExists('offer_users');
     }
 }

@@ -31,6 +31,7 @@ class LoginUserService
         }
 
         try {
+            $this->userRepository->update(["is_active" => 1], $user->id);
             $token = $user->createToken('authToken')->plainTextToken;
             return new SuccessResource(Response::HTTP_OK, "Logged In successfully.", [
                 'user' => new UserResource($user),

@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Http\Resources\ErrorResource;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Description of BaseRequest
