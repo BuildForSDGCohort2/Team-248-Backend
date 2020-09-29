@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
+
+use App\Services\OfferService;
+use App\Services\ViewOffersService;
+
 use App\Http\Resources\ErrorResource;
 use App\Models\Offer;
 use App\Services\CreateOfferService;
 use App\Services\UpdateOfferService;
 use Exception;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Services\RetrieveUserOffersService;
@@ -70,6 +75,10 @@ class OfferController extends Controller
         return $service->execute($request);
     }
 
+    public function index(Request $request, ViewOffersService $service)
+    {
+        return $service->execute($request);
+    }
     /**
      * Update an offer
      *
