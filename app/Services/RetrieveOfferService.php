@@ -31,7 +31,7 @@ class RetrieveOfferService
             $user = $request->user('sanctum');
             $offer_data = \App\Http\Resources\Offer::make($offer);
             if($user){
-                $application = $offer->offerUsers()->where('offer_user.user_id', $user->id)->first();
+                $application = $offer->offerUsers()->where('offer_users.user_id', $user->id)->first();
                 if($user->id == $offer->user_id){ // user is the owner of the offer
                     $offer_data = \App\Http\Resources\Offer::make($offer)->isOwner();
                 } else if($application){ //user applied for this offer
