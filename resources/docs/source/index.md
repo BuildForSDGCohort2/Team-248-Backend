@@ -264,7 +264,7 @@ curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":2,"start_at":"eligendi","end_at":"excepturi","price_per_hour":60.4029,"address":"nisi","preferred_qualifications":"inventore"}'
+    -d '{"category_id":13,"start_at":"voluptas","end_at":"qui","price_per_hour":584.4002,"address":"iusto","preferred_qualifications":"corrupti"}'
 
 ```
 
@@ -279,12 +279,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 2,
-    "start_at": "eligendi",
-    "end_at": "excepturi",
-    "price_per_hour": 60.4029,
-    "address": "nisi",
-    "preferred_qualifications": "inventore"
+    "category_id": 13,
+    "start_at": "voluptas",
+    "end_at": "qui",
+    "price_per_hour": 584.4002,
+    "address": "iusto",
+    "preferred_qualifications": "corrupti"
 }
 
 fetch(url, {
@@ -350,6 +350,50 @@ Parameter | Type | Status | Description
     
 <!-- END_a45eaa0bc07a2833fc15fdfb8cd32142 -->
 
+<!-- START_2741c31dd89e5d192b39977e6ec69bb2 -->
+## api/offers
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/offers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/offers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/offers`
+
+
+<!-- END_2741c31dd89e5d192b39977e6ec69bb2 -->
+
 <!-- START_d8ee1935637e83c8bfa5e3600a25f8c2 -->
 ## Update an offer
 
@@ -362,7 +406,7 @@ curl -X PUT \
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":1,"start_at":"voluptate","end_at":"sapiente","price_per_hour":221633.8,"address":"fuga","preferred_qualifications":"voluptate"}'
+    -d '{"category_id":13,"start_at":"expedita","end_at":"rerum","price_per_hour":48799.54924,"address":"ab","preferred_qualifications":"ad"}'
 
 ```
 
@@ -377,12 +421,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 1,
-    "start_at": "voluptate",
-    "end_at": "sapiente",
-    "price_per_hour": 221633.8,
-    "address": "fuga",
-    "preferred_qualifications": "voluptate"
+    "category_id": 13,
+    "start_at": "expedita",
+    "end_at": "rerum",
+    "price_per_hour": 48799.54924,
+    "address": "ab",
+    "preferred_qualifications": "ad"
 }
 
 fetch(url, {
@@ -460,6 +504,58 @@ Parameter | Type | Status | Description
         `preferred_qualifications` | string |  optional  | optional the address where the offer takes place.
     
 <!-- END_d8ee1935637e83c8bfa5e3600a25f8c2 -->
+
+<!-- START_f7b14e58800200c9dd82259343ecea98 -->
+## Delete an offer
+
+Enables the user to delete an existing offer
+
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost/api/offers/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/offers/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "message": "Offer deleted successfully."
+}
+```
+
+### HTTP Request
+`DELETE api/offers/{offer}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the offer.
+
+<!-- END_f7b14e58800200c9dd82259343ecea98 -->
 
 <!-- START_1c3db579164b812f790141e36fb93fd7 -->
 ## Create an offer application
@@ -623,6 +719,140 @@ fetch(url, {
 
 
 <!-- END_6d3061d375666b8cf6babe163b36f250 -->
+
+<!-- START_49efb800fa17a25dfa0396cdeaae588c -->
+## api/user-offers
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/user-offers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/user-offers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/user-offers`
+
+
+<!-- END_49efb800fa17a25dfa0396cdeaae588c -->
+
+<!-- START_0111b45d14d4d7e802ec02d7c5670f1a -->
+## Deactivate a user account
+
+Enables the user to deactivate his account
+
+> Example request:
+
+```bash
+curl -X PATCH \
+    "http://localhost/api/users/deactivate" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/users/deactivate"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "message": "Account deactivated successfully.",
+    "data": ""
+}
+```
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`PATCH api/users/deactivate`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `user` |  required  | The ID of the user to be deactivated.
+
+<!-- END_0111b45d14d4d7e802ec02d7c5670f1a -->
+
+<!-- START_8685c256eacc0cca0fc32f11c8fd87ea -->
+## api/applied-offers
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/applied-offers" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/applied-offers"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/applied-offers`
+
+
+<!-- END_8685c256eacc0cca0fc32f11c8fd87ea -->
 
 <!-- START_737ccfb685073c55ab973d56082898ff -->
 ## api/forget-password

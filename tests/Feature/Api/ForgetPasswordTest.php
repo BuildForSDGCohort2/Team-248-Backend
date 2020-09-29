@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Log;
 use Notification;
 use Tests\TestCase;
 use Illuminate\Http\Response;
@@ -15,14 +16,14 @@ class ForgetPasswordTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    const ROUTE_FORGET_PASSWORD = 'forget.password';
+    const ROUTE_FORGET_PASSWORD = '/api/forget-password';
 
     /** @test */
     public function testSubmitForgetPasswordRequestInvalidEmail()
     {
         $this
             ->followingRedirects()
-            ->post(route(self::ROUTE_FORGET_PASSWORD), [
+            ->post(self::ROUTE_FORGET_PASSWORD, [
                 'email' => 'invalid_email',
             ])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -35,13 +36,11 @@ class ForgetPasswordTest extends TestCase
     public function testSubmitForgetPasswordRequestEmailNotFound()
     {
         $email = $this->faker->unique()->safeEmail;
-        $this
-            ->followingRedirects()
-            ->post(route(self::ROUTE_FORGET_PASSWORD), [
+        $response = $this->post(self::ROUTE_FORGET_PASSWORD, [
                 'email' => $email,
-            ])
-            ->assertStatus(Response::HTTP_UNAUTHORIZED)
-            ->assertJsonFragment(['message' =>
+            ]);
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response->assertJsonFragment(['message' =>
                 trans('passwords.user', ['email' => $email])]);
     }
 
@@ -50,13 +49,11 @@ class ForgetPasswordTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this
-            ->followingRedirects()
-            ->post(route(self::ROUTE_FORGET_PASSWORD), [
+        $response = $this->post(self::ROUTE_FORGET_PASSWORD, [
                 'email' => $user->email,
-            ])
-            ->assertSuccessful()
-            ->assertSee(__('passwords.sent'));
+            ]);
+        $response->assertSuccessful();
+        $response->assertSee(__('passwords.sent'));
 
         Notification::assertSentTo($user, ResetPassword::class);
     }
