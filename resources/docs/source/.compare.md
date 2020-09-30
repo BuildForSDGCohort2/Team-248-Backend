@@ -264,7 +264,7 @@ curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":16,"start_at":"itaque","end_at":"nisi","price_per_hour":104.780865,"address":"itaque","preferred_qualifications":"eveniet"}'
+    -d '{"category_id":13,"start_at":"voluptas","end_at":"qui","price_per_hour":584.4002,"address":"iusto","preferred_qualifications":"corrupti"}'
 
 ```
 
@@ -279,12 +279,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 16,
-    "start_at": "itaque",
-    "end_at": "nisi",
-    "price_per_hour": 104.780865,
-    "address": "itaque",
-    "preferred_qualifications": "eveniet"
+    "category_id": 13,
+    "start_at": "voluptas",
+    "end_at": "qui",
+    "price_per_hour": 584.4002,
+    "address": "iusto",
+    "preferred_qualifications": "corrupti"
 }
 
 fetch(url, {
@@ -406,7 +406,7 @@ curl -X PUT \
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":3,"start_at":"quas","end_at":"quam","price_per_hour":46666.1181,"address":"adipisci","preferred_qualifications":"dolorem"}'
+    -d '{"category_id":13,"start_at":"expedita","end_at":"rerum","price_per_hour":48799.54924,"address":"ab","preferred_qualifications":"ad"}'
 
 ```
 
@@ -421,12 +421,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 3,
-    "start_at": "quas",
-    "end_at": "quam",
-    "price_per_hour": 46666.1181,
-    "address": "adipisci",
-    "preferred_qualifications": "dolorem"
+    "category_id": 13,
+    "start_at": "expedita",
+    "end_at": "rerum",
+    "price_per_hour": 48799.54924,
+    "address": "ab",
+    "preferred_qualifications": "ad"
 }
 
 fetch(url, {
@@ -853,5 +853,42 @@ fetch(url, {
 
 
 <!-- END_8685c256eacc0cca0fc32f11c8fd87ea -->
+
+<!-- START_737ccfb685073c55ab973d56082898ff -->
+## api/forget-password
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost/api/forget-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/forget-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/forget-password`
+
+
+<!-- END_737ccfb685073c55ab973d56082898ff -->
 
 

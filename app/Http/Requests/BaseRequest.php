@@ -59,7 +59,7 @@ class BaseRequest extends FormRequest
         );
 
         throw new HttpResponseException(
-            response()->json($errorResponse, 422)
+            response()->json($errorResponse, Response::HTTP_UNPROCESSABLE_ENTITY)
         );
     }
 }
