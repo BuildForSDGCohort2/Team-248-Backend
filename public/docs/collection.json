@@ -1,8 +1,8 @@
 {
     "variables": [],
     "info": {
-        "name": "Laravel API",
-        "_postman_id": "876a0474-1f11-46cc-8cf1-a98672933593",
+        "name": "Bebejo API",
+        "_postman_id": "9e44bcdb-27c1-4a45-aff3-e138a45e0745",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -40,15 +40,15 @@
                     }
                 },
                 {
-                    "name": "Update an offer",
+                    "name": "api\/forget-password",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
-                            "path": "api\/offers\/:offer",
+                            "path": "api\/forget-password",
                             "query": []
                         },
-                        "method": "PUT",
+                        "method": "POST",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -61,9 +61,37 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"user_id\": \"autem\"\n}"
+                            "raw": "[]"
                         },
-                        "description": "Enables the user to update an existing offer",
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "api\/reset-password",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/reset-password",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
                         "response": []
                     }
                 }

@@ -29,4 +29,5 @@ Route::post('reset-password', 'API\Auth\ResetPasswordController')->name('passwor
 Route::post('/user-offers', "OfferController@userOffers")->middleware('auth:sanctum');
 Route::patch('/users/deactivate', "UserController@deactivate")->middleware('auth:sanctum');
 Route::post('/applied-offers', "OfferUserController@index")->middleware('auth:sanctum');
+Route::post('/forget-password', 'API\Auth\ForgetPasswordController')->name('forget.password');
 Route::get('offers/{offer}','OfferController@show')->name('offer.show');
