@@ -226,7 +226,7 @@ fetch(url, {
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":13,"start_at":"voluptas","end_at":"qui","price_per_hour":584.4002,"address":"iusto","preferred_qualifications":"corrupti"}'
+    -d '{"category_id":16,"start_at":"sit","end_at":"rerum","price_per_hour":90414.668923,"address":"eos","preferred_qualifications":"vel"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers"
@@ -238,12 +238,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 13,
-    "start_at": "voluptas",
-    "end_at": "qui",
-    "price_per_hour": 584.4002,
-    "address": "iusto",
-    "preferred_qualifications": "corrupti"
+    "category_id": 16,
+    "start_at": "sit",
+    "end_at": "rerum",
+    "price_per_hour": 90414.668923,
+    "address": "eos",
+    "preferred_qualifications": "vel"
 }
 
 fetch(url, {
@@ -383,7 +383,7 @@ fetch(url, {
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":13,"start_at":"expedita","end_at":"rerum","price_per_hour":48799.54924,"address":"ab","preferred_qualifications":"ad"}'
+    -d '{"category_id":13,"start_at":"voluptas","end_at":"libero","price_per_hour":666500.55,"address":"non","preferred_qualifications":"pariatur"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/offers/1"
@@ -396,11 +396,11 @@ let headers = {
 
 let body = {
     "category_id": 13,
-    "start_at": "expedita",
-    "end_at": "rerum",
-    "price_per_hour": 48799.54924,
-    "address": "ab",
-    "preferred_qualifications": "ad"
+    "start_at": "voluptas",
+    "end_at": "libero",
+    "price_per_hour": 666500.55,
+    "address": "non",
+    "preferred_qualifications": "pariatur"
 }
 
 fetch(url, {
@@ -808,17 +808,17 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST api/applied-offers</code></p>
 <!-- END_8685c256eacc0cca0fc32f11c8fd87ea -->
-<!-- START_737ccfb685073c55ab973d56082898ff -->
-<h2>api/forget-password</h2>
+<!-- START_512ca1cc43ac8514662aba3aba6157db -->
+<h2>api/offers/{offer}</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/forget-password" \
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/forget-password"
+    "http://localhost/api/offers/1"
 );
 
 let headers = {
@@ -827,14 +827,21 @@ let headers = {
 };
 
 fetch(url, {
-    method: "POST",
+    method: "GET",
     headers: headers,
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Resource not found.",
+    "errors": ""
+}</code></pre>
 <h3>HTTP Request</h3>
-<p><code>POST api/forget-password</code></p>
-<!-- END_737ccfb685073c55ab973d56082898ff -->
+<p><code>GET api/offers/{offer}</code></p>
+<!-- END_512ca1cc43ac8514662aba3aba6157db -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

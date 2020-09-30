@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
-
 use App\Services\ViewOffersService;
-
 use App\Models\Offer;
 use App\Services\CreateOfferService;
 use App\Services\DeleteOfferService;
 use App\Services\UpdateOfferService;
-
 use Illuminate\Http\Request;
 use App\Services\RetrieveUserOffersService;
 use App\Http\Requests\UserOffersRequest;
+use App\Services\RetrieveOfferService;
 
 class OfferController extends Controller
 {
@@ -156,5 +154,16 @@ class OfferController extends Controller
     public function userOffers(UserOffersRequest $request, RetrieveUserOffersService $service)
     {
         return $service->execute($request);
+    }
+
+    /**
+     * @param Request $request
+     * @param Offer $offer
+     * @param RetrieveOfferService $service
+     * @return \App\Http\Resources\ErrorResource|\App\Http\Resources\SuccessResource
+     */
+    public function show(Request $request, Offer $offer, RetrieveOfferService $service)
+    {
+        return $service->execute($request, $offer);
     }
 }

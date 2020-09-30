@@ -264,7 +264,7 @@ curl -X POST \
     "http://localhost/api/offers" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":13,"start_at":"voluptas","end_at":"qui","price_per_hour":584.4002,"address":"iusto","preferred_qualifications":"corrupti"}'
+    -d '{"category_id":16,"start_at":"sit","end_at":"rerum","price_per_hour":90414.668923,"address":"eos","preferred_qualifications":"vel"}'
 
 ```
 
@@ -279,12 +279,12 @@ let headers = {
 };
 
 let body = {
-    "category_id": 13,
-    "start_at": "voluptas",
-    "end_at": "qui",
-    "price_per_hour": 584.4002,
-    "address": "iusto",
-    "preferred_qualifications": "corrupti"
+    "category_id": 16,
+    "start_at": "sit",
+    "end_at": "rerum",
+    "price_per_hour": 90414.668923,
+    "address": "eos",
+    "preferred_qualifications": "vel"
 }
 
 fetch(url, {
@@ -406,7 +406,7 @@ curl -X PUT \
     "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"category_id":13,"start_at":"expedita","end_at":"rerum","price_per_hour":48799.54924,"address":"ab","preferred_qualifications":"ad"}'
+    -d '{"category_id":13,"start_at":"voluptas","end_at":"libero","price_per_hour":666500.55,"address":"non","preferred_qualifications":"pariatur"}'
 
 ```
 
@@ -422,11 +422,11 @@ let headers = {
 
 let body = {
     "category_id": 13,
-    "start_at": "expedita",
-    "end_at": "rerum",
-    "price_per_hour": 48799.54924,
-    "address": "ab",
-    "preferred_qualifications": "ad"
+    "start_at": "voluptas",
+    "end_at": "libero",
+    "price_per_hour": 666500.55,
+    "address": "non",
+    "preferred_qualifications": "pariatur"
 }
 
 fetch(url, {
@@ -854,20 +854,20 @@ fetch(url, {
 
 <!-- END_8685c256eacc0cca0fc32f11c8fd87ea -->
 
-<!-- START_737ccfb685073c55ab973d56082898ff -->
-## api/forget-password
+<!-- START_512ca1cc43ac8514662aba3aba6157db -->
+## api/offers/{offer}
 > Example request:
 
 ```bash
-curl -X POST \
-    "http://localhost/api/forget-password" \
+curl -X GET \
+    -G "http://localhost/api/offers/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/forget-password"
+    "http://localhost/api/offers/1"
 );
 
 let headers = {
@@ -876,7 +876,7 @@ let headers = {
 };
 
 fetch(url, {
-    method: "POST",
+    method: "GET",
     headers: headers,
 })
     .then(response => response.json())
@@ -884,11 +884,19 @@ fetch(url, {
 ```
 
 
+> Example response (404):
+
+```json
+{
+    "message": "Resource not found.",
+    "errors": ""
+}
+```
 
 ### HTTP Request
-`POST api/forget-password`
+`GET api/offers/{offer}`
 
 
-<!-- END_737ccfb685073c55ab973d56082898ff -->
+<!-- END_512ca1cc43ac8514662aba3aba6157db -->
 
 
