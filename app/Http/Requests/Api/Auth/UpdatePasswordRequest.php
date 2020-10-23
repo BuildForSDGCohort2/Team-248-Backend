@@ -27,6 +27,6 @@ class UpdatePasswordRequest extends FormRequest
 
     private function isUserPassword()
     {
-        return (Hash::check($this->input('current_password'), auth('sanctum')->user()->password));
+        return (Hash::check($this->input('current_password'), auth()->user()->password));
     }
 }

@@ -6,7 +6,7 @@ use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Sanctum\Sanctum;
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class CreateOfferTest extends TestCase
@@ -15,13 +15,16 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferSuccess()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $data = factory(Offer::class)->raw();
         unset($data["status_id"]);
         unset($data["user_id"]);
-        $response = $this->post('/api/offers', $data);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', $data);
         $response->assertStatus(201);
         $response->assertJson(["message" => "Offer created successfully."]);
         $this->assertDatabaseHas("offers", $data);
@@ -29,10 +32,13 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferValidationRequiredFail()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
-        $response = $this->post('/api/offers', []);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', []);
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
@@ -41,11 +47,14 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferValidationDateFail()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $data = factory(Offer::class)->raw(["start_at" => "dummy string", "end_at" => 123]);
-        $response = $this->post('/api/offers', $data);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', $data);
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
@@ -54,11 +63,14 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferValidationEndAfterStartFail()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $data = factory(Offer::class)->raw(["start_at" => "2020-08-26 05:00:00", "end_at" => "2020-08-25 05:00:00"]);
-        $response = $this->post('/api/offers', $data);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', $data);
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
@@ -67,11 +79,14 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferValidationPriceTypeFail()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $data = factory(Offer::class)->raw(["price_per_hour" => "dummy string"]);
-        $response = $this->post('/api/offers', $data);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', $data);
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
@@ -80,11 +95,14 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferValidationPriceMinFail()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $data = factory(Offer::class)->raw(["price_per_hour" => 0]);
-        $response = $this->post('/api/offers', $data);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', $data);
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
@@ -93,11 +111,14 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferValidationPriceMaxFail()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $data = factory(Offer::class)->raw(["price_per_hour" => 20000]);
-        $response = $this->post('/api/offers', $data);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', $data);
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
@@ -106,11 +127,14 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferValidationAddressMaxFail()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $data = factory(Offer::class)->raw(["address" => $this->faker->text(1000)]);
-        $response = $this->post('/api/offers', $data);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', $data);
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
@@ -119,11 +143,14 @@ class CreateOfferTest extends TestCase
 
     public function testCreateOfferValidationPreferredQualificationsMaxFail()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $data = factory(Offer::class)->raw(["preferred_qualifications" => $this->faker->text(1000)]);
-        $response = $this->post('/api/offers', $data);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->json('POST', '/api/offers', $data);
 
         $response->assertStatus(422);
         $response->assertJson(["message" => "The given data was invalid."]);
@@ -138,8 +165,8 @@ class CreateOfferTest extends TestCase
         $response = $this->withHeaders([
             "Content-Type" => "application/json",
             "Accept" => "application/json"
-            ])->post('/api/offers', $data);
+        ])->json('POST', '/api/offers', $data);
         $response->assertStatus(401);
-        $response->assertJson(["message" => "Unauthenticated."]);
+        $response->assertJson(["data" => ["message" => "User Unauthenticated"]]);
     }
 }

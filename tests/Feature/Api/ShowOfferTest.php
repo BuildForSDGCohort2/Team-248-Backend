@@ -9,7 +9,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use Laravel\Sanctum\Sanctum;
 
 class ShowOfferTest extends TestCase
 {
@@ -37,12 +36,16 @@ class ShowOfferTest extends TestCase
     /** @test */
     public function user_auth_can_read_his_offer_and_applicants()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
         $offer = factory(Offer::class)->create();
         $offer->user_id = $user->id;
         $offer->save();
-        $response = $this->get('/api/offers/'.$offer->id);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json'
+        ])->get('/api/offers/'.$offer->id);
 
         $response->assertStatus(200);
         $response->assertJsonStructure(['data' => [
@@ -59,15 +62,18 @@ class ShowOfferTest extends TestCase
     /** @test */
     public function user_auth_can_read_his_applied_offer_and_details()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
         $offer = factory(Offer::class)->create();
         OfferUser::create([
             'offer_id' => $offer->id,
             'user_id' => $user->id,
             'status_id' => (factory(Status::class)->create())->id]);
 
-        $response = $this->get('/api/offers/'.$offer->id);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->get('/api/offers/'.$offer->id);
 
         $response->assertStatus(200);
         $response->assertJsonStructure(['data' => [

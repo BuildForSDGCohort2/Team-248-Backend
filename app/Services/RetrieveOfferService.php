@@ -28,7 +28,7 @@ class RetrieveOfferService
     public function execute(Request $request, Offer $offer)
     {
         try {
-            $user = $request->user('sanctum');
+            $user = $request->user();
             $offer_data = \App\Http\Resources\Offer::make($offer);
             if($user){
                 $application = $offer->offerUsers()->where('offer_users.user_id', $user->id)->first();

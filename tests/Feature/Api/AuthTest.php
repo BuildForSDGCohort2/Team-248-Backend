@@ -5,7 +5,6 @@ namespace Tests\Feature\Api;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -56,20 +55,28 @@ class AuthTest extends TestCase
     /** @test */
     public function user_can_logout()
     {
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Models\User')->create(['password' => 'Test@123']);;
 
-        Sanctum::actingAs($user, ['authToken']);
+        $token = $this->userAuthToken($user);
 
-        $this->post(route('api.logout'))->assertSee('Logged out successfully.');
+        $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json'
+        ])->post(route('api.logout'))->assertSee('Logged out successfully.');
     }
 
     /** @test */
     public function can_get_user_data_by_token()
     {
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Models\User')->create(['password' => 'Test@123']);;
 
-        Sanctum::actingAs($user, ['authToken']);
+        $token = $this->userAuthToken($user);
 
-        $this->get(route('api.getUser'))->assertJsonStructure(['data' => ['user' => ['name', 'email']]]);
+        $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json'
+        ])->get(route('api.getUser'))->assertJsonStructure(['data' => ['user' => ['name', 'email']]]);
     }
 }

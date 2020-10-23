@@ -24,7 +24,7 @@ class RetrieveUserOffersService
     {
         try {
             $filters = array();
-            $user = $request->user('sanctum');
+            $user = $request->user();
             array_push($filters, ['user_id', '=', $user->id]);
             if ($request->has('category_id')) {
                 array_push($filters, ['category_id', '=', $request->get('category_id')]);

@@ -24,7 +24,7 @@ class RetrieveAppliedOffersService
     {
         try {
             $filters = array();
-            $user = $request->user('sanctum');
+            $user = $request->user();
             if ($request->has('category_id')) {
                 array_push($filters, ['category_id', '=', $request->get('category_id')]);
             }

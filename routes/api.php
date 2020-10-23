@@ -15,19 +15,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', 'AuthController@register')->name('register');
 Route::post('login', 'AuthController@login')->name('login');
-Route::post('logout', 'AuthController@logout')->name('logout')->middleware('auth:sanctum');
-Route::get('user', 'AuthController@user')->name('getUser')->middleware('auth:sanctum');
-Route::put('profile/updatePassword', 'AuthController@updatePassword')->name('profile.updatePassword')->middleware('auth:sanctum');
-
-Route::post('/offers', "OfferController@store")->middleware('auth:sanctum');
-Route::get('/offers', "OfferController@index")->middleware('auth:sanctum');
-Route::put('/offers/{offer}', "OfferController@update")->middleware('auth:sanctum');
-Route::delete('/offers/{offer}', "OfferController@destroy")->middleware('auth:sanctum');
-Route::post('/offers/{offer}/apply', "OfferUserController@store")->middleware('auth:sanctum');
-Route::patch('/applications/{application}/cancel', "OfferUserController@cancel")->middleware('auth:sanctum');
-Route::post('reset-password', 'API\Auth\ResetPasswordController')->name('password.reset');
-Route::post('/user-offers', "OfferController@userOffers")->middleware('auth:sanctum');
-Route::patch('/users/deactivate', "UserController@deactivate")->middleware('auth:sanctum');
-Route::post('/applied-offers', "OfferUserController@index")->middleware('auth:sanctum');
 Route::post('/forget-password', 'API\Auth\ForgetPasswordController')->name('forget.password');
+Route::post('reset-password', 'API\Auth\ResetPasswordController')->name('password.reset');
+
+Route::middleware('auth:api')->group(
+    function () {
+        Route::post('logout', 'AuthController@logout')->name('logout');
+        Route::get('user', 'AuthController@user')->name('getUser');
+        Route::put('profile/updatePassword', 'AuthController@updatePassword')->name('profile.updatePassword');
+
+        Route::post('/offers', "OfferController@store");
+        Route::get('/offers', "OfferController@index");
+        Route::put('/offers/{offer}', "OfferController@update");
+        Route::delete('/offers/{offer}', "OfferController@destroy");
+        Route::post('/offers/{offer}/apply', "OfferUserController@store");
+        Route::patch('/applications/{application}/cancel', "OfferUserController@cancel");
+        Route::post('/user-offers', "OfferController@userOffers");
+        Route::patch('/users/deactivate', "UserController@deactivate");
+        Route::post('/applied-offers', "OfferUserController@index");
+    });
+
 Route::get('offers/{offer}','OfferController@show')->name('offer.show');

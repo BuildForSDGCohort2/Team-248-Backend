@@ -8,6 +8,8 @@ use App\Repositories\UserRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LogoutUserService
 {
@@ -21,9 +23,10 @@ class LogoutUserService
     public function execute(Request $request)
     {
         try {
-            $request->user()->currentAccessToken()->delete();
+            Auth::guard()->logout();
             return new SuccessResource(Response::HTTP_OK, "Logged out successfully.");
         } catch (Exception $e) {
+            Log::info($e);
             return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }
     }

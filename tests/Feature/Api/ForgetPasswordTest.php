@@ -47,7 +47,7 @@ class ForgetPasswordTest extends TestCase
     /** @test */
     public function testSubmitForgetPasswordRequestSuccess()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create(['password' => 'Test@123']);
 
         $response = $this->post(self::ROUTE_FORGET_PASSWORD, [
                 'email' => $user->email,

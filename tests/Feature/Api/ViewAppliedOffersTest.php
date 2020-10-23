@@ -5,12 +5,9 @@ namespace Tests\Feature;
 use App\Models\Offer;
 use App\Models\OfferCategory;
 use App\Models\OfferUser;
-use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Log;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class ViewAppliedOffersTest extends TestCase
@@ -21,14 +18,17 @@ class ViewAppliedOffersTest extends TestCase
 
     public function testViewAppliedOffersSuccess()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
         factory(OfferUser::class, 10)->create(['user_id' => $user->id]);
 
         $user2 = factory(User::class)->create();
         factory(OfferUser::class, 10)->create(['user_id' => $user2->id]);
 
-        $response = $this->post('/api/applied-offers');
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->post('/api/applied-offers');
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()["data"];
         foreach ($data as $offer) {
@@ -38,7 +38,7 @@ class ViewAppliedOffersTest extends TestCase
 
     public function testViewAppliedOfferUnauthenticated()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create(['password' => 'Test@123']);
         factory(OfferUser::class, 10)->create(['user_id' => $user->id]);
 
         $response = $this->withHeaders([
@@ -47,17 +47,20 @@ class ViewAppliedOffersTest extends TestCase
         ])->post('/api/applied-offers');
 
         $response->assertStatus(401);
-        $response->assertJson(["message" => "Unauthenticated."]);
+        $response->assertJson(["data" => ["message" => "User Unauthenticated"]]);
     }
 
     public function testViewAppliedOffersPagination()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         factory(OfferUser::class, 20)->create(['user_id' => $user->id]);
 
-        $response = $this->post('/api/applied-offers');
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->post('/api/applied-offers');
         $response->assertStatus(200);
         $response->assertJson(['meta' => ['per_page' => self::PER_PAGE]]);
         $data = $response->decodeResponseJson()["data"];
@@ -68,8 +71,8 @@ class ViewAppliedOffersTest extends TestCase
 
     public function testViewAppliedOffersByCategory()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $cat1 = factory(OfferCategory::class)->create();
         $cat2 = factory(OfferCategory::class)->create();
@@ -79,7 +82,10 @@ class ViewAppliedOffersTest extends TestCase
         factory(OfferUser::class)->create(['user_id' => $user->id, 'offer_id' => $offer1->id]);
 
 
-        $response = $this->post('/api/applied-offers?category_id=' . $cat1->id);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->post('/api/applied-offers?category_id=' . $cat1->id);
         $data = $response->decodeResponseJson()["data"];
         foreach ($data as $offer) {
             $this->assertEquals($offer["category"]["name"], $cat1->name);
