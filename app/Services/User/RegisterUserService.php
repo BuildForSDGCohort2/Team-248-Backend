@@ -9,14 +9,21 @@ use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
 use Exception;
 use Illuminate\Http\Response;
+use Tymon\JWTAuth\JWTAuth;
 
 class RegisterUserService
 {
     protected $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    /**
+     * @var JWTAuth
+     */
+    private $jwt = NULL;
+
+    public function __construct(UserRepository $userRepository, JWTAuth $jwt)
     {
         $this->userRepository = $userRepository;
+        $this->jwt = $jwt;
     }
 
     public function execute(RegisterRequest $request)
@@ -35,9 +42,9 @@ class RegisterUserService
             }
 
             $user = $this->userRepository->create($data);
+            $token = $this->jwt->attempt(['email' => $request->input('email'),'password' => $request->input('password')]);
 
-            $token = $user->createToken('authToken')->plainTextToken;
-            return new SuccessResource(Response::HTTP_CREATED, "Registred successfully.", [
+            return new SuccessResource(Response::HTTP_CREATED, "Registered successfully.", [
                 'user' => new UserResource($user),
                 'token' => $token
             ]);
