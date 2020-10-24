@@ -22,7 +22,7 @@ class UserController extends Controller
      *
      *
      * @response 401 {
-     *  "message": "Unauthenticated."
+     *  "message": "User Unauthenticated"
      *}
      *
      */

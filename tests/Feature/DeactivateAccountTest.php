@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class DeactivateAccountTest extends TestCase
@@ -13,10 +12,13 @@ class DeactivateAccountTest extends TestCase
     
     public function testDeactivateAccountSuccess()
     {
-        $user = factory(User::class)->create(["is_active"=>1]);
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(["is_active"=>1, 'password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
-        $response = $this->patch("/api/users/deactivate");
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->patch("/api/users/deactivate");
 
         $response->assertStatus(200);
         $response->assertJson(["message" => "Account deactivated successfully."]);
@@ -30,6 +32,6 @@ class DeactivateAccountTest extends TestCase
             "Accept" => "application/json"
         ])->patch("/api/users/deactivate");
         $response->assertStatus(401);
-        $response->assertJson(["message" => "Unauthenticated."]);
+        $response->assertJson(["data" => ["message" => "User Unauthenticated"]]);
     }
 }

@@ -3,12 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Offer;
-use App\Models\OfferCategory;
-use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class DeleteOfferTest extends TestCase
@@ -17,12 +14,15 @@ class DeleteOfferTest extends TestCase
 
     public function testDeleteOfferSuccess()
     {
-        $user = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $user = factory(User::class)->create(['password' => 'Test@123']);
+        $token = $this->userAuthToken($user);
 
         $offer = factory(Offer::class)->create(["user_id" => $user->id]);
 
-        $response = $this->delete('/api/offers/' . $offer->id);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json',
+        ])->delete('/api/offers/' . $offer->id);
         $offer->refresh();
         $response->assertStatus(200);
         $response->assertJson(["message" => "Offer deleted successfully."]);
@@ -40,20 +40,21 @@ class DeleteOfferTest extends TestCase
         ])->delete('/api/offers/' . $offer->id);
 
         $response->assertStatus(401);
-        $response->assertJson(["message" => "Unauthenticated."]);
+        $response->assertJson(["data" => ["message" => "User Unauthenticated"]]);
     }
 
     public function testDeleteOfferUnauthorized()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create(['password' => 'Test@123']);
         $user2 = factory(User::class)->create();
-        Sanctum::actingAs($user);
+        $token = $this->userAuthToken($user);
 
         $offer = factory(Offer::class)->create(["user_id" => $user2->id]);
 
         $response =  $this->withHeaders([
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token,
         ])->delete('/api/offers/' . $offer->id);
         $offer->refresh();
         $response->assertStatus(403);

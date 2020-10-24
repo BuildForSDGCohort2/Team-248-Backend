@@ -12,7 +12,7 @@ class OfferCategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(OfferCategory::class)->create(["name" => "Babysitting", "description" => "Request for a babysitter"]);
-        factory(OfferCategory::class)->create(["name" => "Elderly Care", "description" => "Request for a sitter to keep the elderly company"]);
+        OfferCategory::create(["name" => "Babysitting", "description" => "Request for a babysitter"]);
+        OfferCategory::create(["name" => "Elderly Care", "description" => "Request for a sitter to keep the elderly company"]);
     }
 }

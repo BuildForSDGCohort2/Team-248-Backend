@@ -11,6 +11,7 @@ use App\Repositories\OfferRepository;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class UpdateOfferService
 {
@@ -41,6 +42,7 @@ class UpdateOfferService
             return new SuccessResource(Response::HTTP_OK, "Offer updated successfully.", ["id" => $offer->id]);
         } catch (Exception $e) {
 
+            Log::info($e);
             if ($e instanceof ModelNotFoundException) {
                 return new ErrorResource(Response::HTTP_UNPROCESSABLE_ENTITY, "The given data was invalid.", ["category_id" => "Category not found."]);
             }
