@@ -49,7 +49,7 @@ class CreateOfferUserService
             $data["status_id"] = $status->id;
             return $data;
         }
-        $data["status_id"] = $this->statusRepository->create(["name" => "New", "description" => "New Offer Status", "code" => "1"])->id;
+        $data["status_id"] = $this->statusRepository->create(["name" => "New", "description" => "New Offer Status", "code" => "new"])->id;
         return $data;
     }
 }
