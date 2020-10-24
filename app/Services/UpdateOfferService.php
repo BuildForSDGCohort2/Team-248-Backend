@@ -36,6 +36,10 @@ class UpdateOfferService
                 "price_per_hour" => $request->price_per_hour,
                 "address" => $request->address,
                 "preferred_qualifications" => $request->preferred_qualifications,
+                "title" => $request->title,
+                "description" => $request->description,
+                "exp_from" => $request->exp_from,
+                "exp_to" => $request->exp_to,
             ];
 
             $this->offerRepository->update($data, $offer->id);

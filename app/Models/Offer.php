@@ -20,7 +20,8 @@ class Offer extends Model
     protected $fillable = [
         'user_id', 'category_id', 'start_at',
         'end_at', 'price_per_hour',
-        'address', 'preferred_qualifications', 'status_id'
+        'address', 'preferred_qualifications', 'status_id',
+        'title', 'description', 'exp_from', 'exp_to'
     ];
 
     /**

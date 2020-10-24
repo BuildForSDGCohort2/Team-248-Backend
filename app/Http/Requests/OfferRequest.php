@@ -35,7 +35,11 @@ class OfferRequest extends BaseRequest
             "end_at" => "required|date|after:start_at",
             "price_per_hour" => "required|numeric|min:1|max:5000",
             "address" => "required|max:500",
-            "preferred_qualifications" => "max:500"
+            "preferred_qualifications" => "max:500",
+            "description" => "required|max:500",
+            "title" => "required|max:200",
+            "exp_from" => "nullable|integer|min:1",
+            "exp_to" => "nullable|integer|min:1|gte:exp_from",
         ];
     }
 
