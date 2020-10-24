@@ -36,3 +36,4 @@ Route::middleware('auth:api')->group(
     });
 
 Route::get('offers/{offer}','OfferController@show')->name('offer.show');
+Route::get('categories','OfferCategoriesController@index');
