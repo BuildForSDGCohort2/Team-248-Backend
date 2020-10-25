@@ -16,7 +16,6 @@ class Offer extends JsonResource
     private $isApplicant = false;
     private $applicant_data = null;
 
-
     /**
      * Transform the resource into an array.
      *
@@ -30,6 +29,7 @@ class Offer extends JsonResource
         if($this->isApplicant){
             $this->setApplicantData($this);
         }
+
         return [
             'id'                        => $this->id,
             'category'                  => new OfferCategoryResource($this->category),
