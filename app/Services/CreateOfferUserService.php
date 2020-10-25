@@ -10,6 +10,7 @@ use App\Repositories\StatusRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class CreateOfferUserService
 {
@@ -31,7 +32,8 @@ class CreateOfferUserService
 
         $data = [
             "user_id" => $request->user()->id,
-            "offer_id" => $offer->id
+            "offer_id" => $offer->id,
+            "proposal" => $request->proposal
         ];
         $data = $this->setStatusId($data);
         try {

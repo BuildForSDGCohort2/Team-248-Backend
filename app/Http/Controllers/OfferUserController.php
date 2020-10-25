@@ -22,13 +22,13 @@ class OfferUserController extends Controller
     {
         return $service->execute($request);
     }
-    
+
     /**
      * Create an offer application
      *
      * Enables the user to apply an offer
-     * 
-     * 
+     *
+     *
      * @response  201 {
      *    "message": "Application created successfully.",
      *   "data": {
@@ -40,14 +40,16 @@ class OfferUserController extends Controller
      *  "message": "Resource not found.",
      *   "errors": ""
      *}
-
      * @response 422 {
      *"data": {
      *     "message": "This offer has already been approved.",
      *      "errors": ""
      *   }
      *}
-     *
+     * @param Request $request
+     * @param Offer $offer
+     * @param CreateOfferUserService $service
+     * @return \App\Http\Resources\ErrorResource|\App\Http\Resources\SuccessResource
      */
     public function store(Request $request, Offer $offer, CreateOfferUserService $service)
     {

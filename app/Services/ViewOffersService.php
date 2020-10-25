@@ -7,6 +7,7 @@ use App\Http\Resources\OfferResource;
 use App\Repositories\OfferRepository;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class ViewOffersService
 {
@@ -30,6 +31,7 @@ class ViewOffersService
                 ->paginate($count);
             return OfferResource::collection($offers);
         } catch (Exception $e) {
+            Log::info($e);
             return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }
     }
