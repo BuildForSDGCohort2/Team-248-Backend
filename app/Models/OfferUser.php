@@ -18,7 +18,7 @@ class OfferUser extends Model
      */
 
     protected $fillable = [
-        'user_id', 'offer_id', 'status_id',
+        'user_id', 'offer_id', 'status_id', 'proposal'
     ];
 
     /**

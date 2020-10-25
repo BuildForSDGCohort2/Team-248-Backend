@@ -17,12 +17,14 @@ class OfferRepository extends BaseRepository
     {
         $conditions = [
             ["user_id", "!=", $userId],
-            ["status.code", "=", "new"]
         ];
         if ($categoryId) {
             $conditions[] = ["category_id", "=", $categoryId];
         }
-        return $this->model->with(['category', 'status']);
+        $this->findWhere($conditions)->with(['category', 'status']);
+        return $this->model->whereHas('status', function ($q) {
+            $q->where('status.code', "new");
+        });
     }
 
     public function getAppliedOffers($user_id, $status_id){
