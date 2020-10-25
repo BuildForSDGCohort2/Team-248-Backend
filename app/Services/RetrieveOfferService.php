@@ -23,7 +23,7 @@ class RetrieveOfferService
     /**
      * @param Request $request
      * @param Offer $offer
-     * @return ErrorResource|SuccessResource
+     * @return \App\Http\Resources\Offer|ErrorResource
      */
     public function execute(Request $request, Offer $offer)
     {

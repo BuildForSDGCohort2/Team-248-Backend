@@ -56,8 +56,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->email;
     }
 
-    public function offerUsers(){
+    public function offerUsers()
+    {
         return $this->hasMany(\App\Models\OfferUser::class, 'user_id');
+    }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
     }
 
     /**
@@ -90,4 +96,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+
 }

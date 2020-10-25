@@ -3,8 +3,7 @@
 namespace App\Services;
 
 use App\Http\Resources\ErrorResource;
-use App\Http\Resources\SuccessResource;
-use App\Models\Offer;
+use App\Http\Resources\OfferResource;
 use App\Repositories\OfferRepository;
 use Exception;
 use Illuminate\Http\Response;
@@ -27,8 +26,9 @@ class ViewOffersService
             if ($paginate) {
                 $count = $paginate;
             }
-            $offers = $this->offerRepository->getNewOffers($userId, $request->query("category_id"))->paginate($count);
-            return new SuccessResource(Response::HTTP_OK, "Offers fetched successfully.", $offers);
+            $offers = $this->offerRepository->getNewOffers($userId, $request->query("category_id"))
+                ->paginate($count);
+            return OfferResource::collection($offers);
         } catch (Exception $e) {
             return new ErrorResource(Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }

@@ -16,7 +16,6 @@ class Offer extends JsonResource
     private $isApplicant = false;
     private $applicant_data = null;
 
-
     /**
      * Transform the resource into an array.
      *
@@ -30,13 +29,14 @@ class Offer extends JsonResource
         if($this->isApplicant){
             $this->setApplicantData($this);
         }
+
         return [
             'id'                        => $this->id,
             'category'                  => new OfferCategoryResource($this->category),
             'status'                    => $this->when(Auth::user() && $this->isOwner,
                                             new OfferStatusResource($this->status)),
-            'start_at'                  => Carbon::parse($this->start_at)->timestamp,
-            'end_at'                    => Carbon::parse($this->end_at)->timestamp,
+            'start_at'                  => $this->start_at,
+            'end_at'                    => $this->end_at,
             'price_per_hour'            => $this->price_per_hour,
             'address'                   => $this->address,
             'preferred_qualifications'  => $this->preferred_qualifications,
