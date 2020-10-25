@@ -23,6 +23,7 @@ Route::middleware('auth:api')->group(
         Route::post('logout', 'AuthController@logout')->name('logout');
         Route::get('user', 'AuthController@user')->name('getUser');
         Route::put('profile/updatePassword', 'AuthController@updatePassword')->name('profile.updatePassword');
+        Route::get('profile/offers', 'UserController@offers')->name('profile.myOffers');
 
         Route::post('/offers', "OfferController@store");
         Route::get('/offers', "OfferController@index");
