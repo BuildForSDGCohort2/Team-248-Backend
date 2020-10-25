@@ -60,20 +60,23 @@ class OfferUserController extends Controller
      * Cancel an application
      *
      * Enables the user to cancel his application for an offer
-     * 
-     * 
+     *
+     *
      * @response  200 {
      *    "message": "Application cancelled successfully.",
      *    "data": ""
      * }
-     * 
+     *
      * @response 401 {
      *"data": {
      *     "message": "This action is unauthorized.",
      *      "errors": ""
      *   }
      *}
-     *
+     * @param Request $request
+     * @param OfferUser $application
+     * @param CancelOfferUserService $service
+     * @return \App\Http\Resources\ErrorResource|\App\Http\Resources\SuccessResource
      */
     public function cancel(Request $request, OfferUser $application, CancelOfferUserService $service)
     {
